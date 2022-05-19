@@ -265,10 +265,9 @@
       let phone = document.getElementById('phone').value;
       let email = document.getElementById('email').value;
       let msg = document.getElementById("msg");
-      let sexo = document.querySelector('input[name="customRadio"]:checked')
-      console.log(sexo);
+      let sexo = document.querySelector('input[name="customRadio"]:checked');
 
-      if (name == "" & lastname1 == "" & lastname2 == "" & phone == "" & email == "" && sexo == "") {
+      if (name == "" & lastname1 == "" & lastname2 == "" & phone == "" & email == "" && sexo == null) {
         msg.className = "alert alert-danger";
         msg.innerHTML = "Llenar los datos solicitados!.";
       } else if (name == "") {
@@ -286,7 +285,7 @@
       } else if (email == "") {
         msg.className = "alert alert-warning";
         msg.innerHTML = "Llenar Correo!.";
-      } else if (sexo == "") {
+      } else if (sexo == null) {
         msg.className = "alert alert-warning";
         msg.innerHTML = "Seleccionar Sexo!.";
       }else {
@@ -300,9 +299,8 @@
         }
 
         let http = new XMLHttpRequest();
-        let url = 'php/add_custom.php';
-        let params = 'name=' + name + '&lastname1=' + lastname1 + '&lastname2=' + lastname2 + '&phone=' + phone + '&photo=' + fotoG;
-        console.log(params);
+        let url = '../php/add_custom.php';
+        let params = 'name=' + name + '&lastname1=' + lastname1 + '&lastname2=' + lastname2 + '&phone=' + phone + '&email=' + email + '&sexo=' + sexo.value + '&photo=' + fotoG;
         http.open('POST', url, true);
         http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 
@@ -318,6 +316,7 @@
             } else {
               msg.className = "alert alert-danger";
               msg.innerHTML = "Ha ocurrido un error!.";
+              console.log(http.responseText);
             }
           }
         }

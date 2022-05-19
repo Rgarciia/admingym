@@ -1,9 +1,14 @@
 <?php
 include("../db/dbconnect.php");
 
+$name=$_POST['name'];
+$lastname1=$_POST['lastname1'];
+$lastname2=$_POST['lastname2'];
+$phone=$_POST['phone'];
 $email=$_POST['email'];
-$pass=$_POST['password'];
-$tipo=$_POST['tipo'];
+$sexo=$_POST['sexo'];
+$photo=$_POST['photo'];
+$fecha=date("Y/m/d H:i:s");
 
 
 $conn = mysqli_connect($servername, $username, $password, $dbname);
@@ -14,12 +19,12 @@ if (!$conn) {
     $result = mysqli_query($conn, $sql);
 
     if (mysqli_num_rows($result) > 0) {
-    while($row = mysqli_fetch_assoc($result)) {
-       echo "1"
-    }
+      while($row = mysqli_fetch_assoc($result)) {
+       echo "1";
+      }
     } else {
-        $sql2 = "INSERT INTO MyGuests (firstname, lastname, email)
-        VALUES ('John', 'Doe', 'john@example.com')";
+        $sql2 = "INSERT INTO customers (name, lastname1, lastname2, email, phone, sexo, foto, fecha_registro)
+        VALUES ('$name', '$lastname1', '$lastname2', '$email', $phone, '$sexo', '$photo', '$fecha')";
 
         if (mysqli_query($conn, $sql2)) {
         echo "0";
