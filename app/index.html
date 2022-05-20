@@ -56,23 +56,23 @@
       <div class="aside-body">
         <div class="aside-loggedin">
           <div class="d-flex align-items-center justify-content-start">
-            <a href="" class="avatar"><img src="https://via.placeholder.com/500" class="rounded-circle" alt=""></a>
+            <a href="" class="avatar"><img src="" class="rounded-circle" alt="User" id="userIMG"></a>
             <div class="aside-alert-link">
-              <a href="" data-toggle="tooltip" title="Sign out"><i data-feather="log-out"></i></a>
+              <a href="#" data-toggle="tooltip" title="Sign out" onclick="Logout();"><i data-feather="log-out"></i></a>
             </div>
           </div>
           <div class="aside-loggedin-user">
             <a href="#loggedinMenu" class="d-flex align-items-center justify-content-between mg-b-2" data-toggle="collapse">
-              <h6 class="tx-semibold mg-b-0">Katherine Pechon</h6>
+              <h6 class="tx-semibold mg-b-0"><span id="userSession"></span></h6>
               <i data-feather="chevron-down"></i>
             </a>
-            <p class="tx-color-03 tx-12 mg-b-0">Administrator</p>
+            <p class="tx-color-03 tx-12 mg-b-0" id="role"></p>
           </div>
           <div class="collapse" id="loggedinMenu">
             <ul class="nav nav-aside mg-b-0">
-              <li class="nav-item"><a href="" class="nav-link"><i data-feather="edit"></i> <span>Edit Profile</span></a></li>
-              <li class="nav-item"><a href="" class="nav-link"><i data-feather="user"></i> <span>View Profile</span></a></li>
-              <li class="nav-item"><a href="" class="nav-link"><i data-feather="settings"></i> <span>Account Settings</span></a></li>
+              <li class="nav-item"><a href="userprofile.html" class="nav-link"><i data-feather="edit"></i> <span>Editar Perfil</span></a></li>
+              <li class="nav-item"><a href="showprofile.html" class="nav-link"><i data-feather="user"></i> <span>Ver Perfil</span></a></li>
+              <li class="nav-item"><a href="changepass.html" class="nav-link"><i data-feather="settings"></i> <span>Cambiar Contraseña</span></a></li>
             </ul>
           </div>
         </div><!-- aside-loggedin -->
@@ -608,6 +608,7 @@
     <script src="../assets/js/dashforge.js"></script>
     <script src="../assets/js/dashforge.aside.js"></script>
     <script src="../assets/js/dashforge.sampledata.js"></script>
+    <script src="../assets/js/session.js"></script>
 
     <!-- append theme customizer -->
     <script src="../lib/js-cookie/js.cookie.js"></script>
