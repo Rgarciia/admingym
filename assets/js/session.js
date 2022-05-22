@@ -19,7 +19,7 @@ if (username != null & roleSession != null) {
                 userSession.textContent = datos['NAME'] + ' ' + datos['LASTNAME1'] + ' ' + datos['LASTNAME2'];
                 role.textContent = datos['ROLE'];
                 imgUser.src = datos['PHOTO'];
-                console.log(datos);
+                //console.log(datos);
             }
             //console.log("Verifica que los datos sean correctos!.");
         }

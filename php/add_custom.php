@@ -20,7 +20,7 @@ if (!$conn) {
 
     if (mysqli_num_rows($result) > 0) {
       while($row = mysqli_fetch_assoc($result)) {
-       echo "1";
+        echo "1";
       }
     } else {
         $sql2 = "INSERT INTO customers (NAME, LASTNAME1, LASTNAME2, EMAIL, PHONE, SEXO, FOTO, FECHA_REGISTRO)

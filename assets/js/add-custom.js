@@ -98,6 +98,7 @@
             if (http.responseText == 1) {
               msg.className = "alert alert-danger";
               msg.innerHTML = "El cliente ya ha sido registrado!.";
+              //console.log(http.responseText);
 
             } else if (http.responseText == 0) {
               msg.className = "alert alert-success";
@@ -106,7 +107,7 @@
             } else {
               msg.className = "alert alert-danger";
               msg.innerHTML = "Ha ocurrido un error!.";
-              console.log(http.responseText);
+             // console.log(http.responseText);
             }
           }
         }

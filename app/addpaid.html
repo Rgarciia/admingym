@@ -73,9 +73,12 @@
         </div>
         <div class="collapse" id="loggedinMenu">
           <ul class="nav nav-aside mg-b-0">
-            <li class="nav-item"><a href="userprofile.html" class="nav-link"><i data-feather="edit"></i> <span>Editar Perfil</span></a></li>
-            <li class="nav-item"><a href="showprofile.html" class="nav-link"><i data-feather="user"></i> <span>Ver Perfil</span></a></li>
-            <li class="nav-item"><a href="changepass.html" class="nav-link"><i data-feather="settings"></i> <span>Cambiar Contraseña</span></a></li>
+            <li class="nav-item"><a href="userprofile.html" class="nav-link"><i data-feather="edit"></i> <span>Editar
+                  Perfil</span></a></li>
+            <li class="nav-item"><a href="showprofile.html" class="nav-link"><i data-feather="user"></i> <span>Ver
+                  Perfil</span></a></li>
+            <li class="nav-item"><a href="changepass.html" class="nav-link"><i data-feather="settings"></i>
+                <span>Cambiar Contraseña</span></a></li>
           </ul>
         </div>
       </div><!-- aside-loggedin -->
@@ -85,20 +88,20 @@
             <span>Ventas</span></a></li>
 
         <li class="nav-label mg-t-25">Administración</li>
-        <li class="nav-item with-sub active">
+        <li class="nav-item with-sub">
           <a href="" class="nav-link"><i data-feather="user"></i> <span>Clientes</span></a>
           <ul>
             <li><a href="addcustomer.html">Registrar Cliente</a></li>
             <li><a href="listcustomers.html">Listado de Clientes</a></li>
           </ul>
         </li>
-        <li class="nav-item with-sub">
+        <li class="nav-item with-sub active">
           <a href="" class="nav-link"><i data-feather="dollar-sign"></i> <span>Pagos</span></a>
           <ul>
             <li><a href="addpaid.html">Registrar Pago</a></li>
             <li><a href="listpaid.html">Listado de Pagos</a></li>
           </ul>
-        </li>        
+        </li>
       </ul>
     </div>
   </aside>
@@ -118,8 +121,8 @@
           <div>
             <nav aria-label="breadcrumb">
               <ol class="breadcrumb breadcrumb-style1 mg-b-10">
-                <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Registrar Cliente</li>
+                <li class="breadcrumb-item"><a href="#">Pagos</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Registrar Pago</li>
               </ol>
             </nav>
           </div>
@@ -129,65 +132,23 @@
           <div class="media align-items-stretch justify-content-center ht-100p">
             <div class="sign-wrapper mg-lg-r-50 mg-xl-r-60">
               <div class="pd-t-20 wd-100p">
-                <h4 class="tx-color-01 mg-b-5">Registrar Nuevo Cliente</h4>
-                <p class="tx-color-03 tx-16 mg-b-40">Puedes activar la camara para tomar una fotografía!</p>
-
+                <h4 class="tx-color-01 mg-b-5">Registrar Nuevo Pago</h4>
+                <div class="search-form">
+                  <input id="theBasics" type="search" class="form-control" placeholder="Escribir Correo">
+                </div><br>
                 <div class="form-group">
-                  <label>Nombre<span class="tx-danger">*</span></label>
-                  <input type="text" class="form-control" placeholder="Escribir Nombre" id="name" required>
-                </div>
-                <div class="form-group">
-                  <div class="d-flex justify-content-between mg-b-5">
-                    <label class="mg-b-0-f">Apellido Paterno<span class="tx-danger">*</span></label>
-                  </div>
-                  <input type="text" class="form-control" placeholder="Escribir Apellido" id="lastname1">
-                </div>
-                <div class="form-group">
-                  <label>Apellido Materno<span class="tx-danger">*</span></label>
-                  <input type="text" class="form-control" placeholder="Escribir Apellido" id="lastname2">
-                </div>
-                <div class="form-group">
-                  <label>N° de Télefono<span class="tx-danger">*</span></label>
-                  <input type="number" class="form-control" placeholder="Escribir Télefono" id="phone">
-                </div>
-                <div class="form-group">
-                  <label>Correo<span class="tx-danger">*</span></label>
-                  <input type="email" class="form-control" placeholder="example@example.com" id="email">
-                </div>
-                <div class="form-group">
-                  <label>Sexo<span class="tx-danger">*</span></label>
-                  <div class="custom-control custom-radio">
-                    <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input" value="H">
-                    <label class="custom-control-label" for="customRadio1" >H</label>
-                  </div>
-
-                  <div class="custom-control custom-radio">
-                    <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input" value="M">
-                    <label class="custom-control-label" for="customRadio2">M</label>
-                  </div>
-                </div>
-                <div class="form-group custom-control custom-switch">
-                  <input type="checkbox" class="custom-control-input" id="customSwitch1" onclick="activarCamara()">
-                  <label class="custom-control-label" for="customSwitch1">Activar la camara</label>
-                </div>
-                <div class="form-group">
+                  <center><button class="btn btn-brand-02 btn-block" onclick="GetInfoUsr();"
+                      style="display: none;">Buscar</button>
+                  </center>
                   <div role="alert" id="msg">
                   </div>
                 </div>
-
-                <button class="btn btn-brand-02 btn-block" onclick="GuardarCli();">Create Account</button>
-
-
               </div>
             </div><!-- sign-wrapper -->
             <div class="media-body pd-y-30 pd-lg-x-50 pd-xl-x-60 align-items-center d-none d-lg-flex pos-relative">
-              <div class="mx-lg-wd-500 mx-xl-wd-550" id="divCamera">
+              <div class="mx-lg-wd-500 mx-xl-wd-550" id="divResult" style="display: none;">
                 <img src="../assets/img/user-default.png" class="img-fluid" alt="" id="img">
-                <video id="player" autoplay=""></video><br>
-                <center><button class="btn btn-brand-02 btn-block btn-pill btn-outline-success-2x btn-air-success"
-                    type="button" data-bs-original-title="Tomar foto" data-original-title="Tomar foto" id="btnCamera"
-                    style="display: none;">
-                    <i class="fa fa-camera"></i> Tomar Foto</button>
+                <center><button class="btn btn-brand-02 btn-block" onclick="ResgistrarPaid();">Create Account</button>
                 </center>
               </div>
 
@@ -203,16 +164,80 @@
   <script src="../lib/feather-icons/feather.min.js"></script>
   <script src="../lib/perfect-scrollbar/perfect-scrollbar.min.js"></script>
   <script src="../lib/chart.js/Chart.bundle.min.js"></script>
-
+  <script src="../lib/typeahead.js/typeahead.bundle.min.js"></script>
   <script src="../assets/js/dashforge.js"></script>
   <script src="../assets/js/dashforge.aside.js"></script>
   <script src="../assets/js/dashforge.sampledata.js"></script>
-  <script src="../assets/js/camara-class.js"></script>
-  <script src="../assets/js/add-custom.js"></script>
   <script src="../assets/js/session.js"></script>
 
   <!-- append theme customizer -->
   <script src="../lib/js-cookie/js.cookie.js"></script>
+  <script>
+    $(function () {
+      'use strict'
+      var substringMatcher = function (strs) {
+        return function findMatches(q, cb) {
+          var matches, substrRegex;
+          matches = [];
+          substrRegex = new RegExp(q, 'i');
+
+          $.each(strs, function (i, str) {
+            if (substrRegex.test(str)) {
+              matches.push(str);
+            }
+          });
+
+          cb(matches);
+          $('.tt-highlight').on('click', function () {
+            console.log($(this));
+          });
+        };
+      };
+
+      let http = new XMLHttpRequest();
+      let result = [];
+      let url = '../php/get_customers.php';
+      let customers = "";
+      let array = [];
+      http.open('GET', url, true);
+      http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+      http.onreadystatechange = function () {
+        if (http.readyState == 4 && http.status == 200) {
+          if (http.responseText != 1) {
+            let datos = JSON.parse(http.responseText);
+            let datosC = (datos['customers']);
+            for (let i = 0; i < datosC.length; i++) {
+              //array.push(datosC[i]['PHONE']+' - '+datosC[i]['EMAIL']);
+              array.push(datosC[i]['EMAIL']);
+            }
+
+            $('#theBasics').typeahead({
+              hint: true,
+              highlight: true,
+              minLength: 1
+            },
+              {
+                name: 'array',
+                source: substringMatcher(array)
+              });
+
+          } else if (http.responseText == 0) {
+            msg.className = "alert alert-danger";
+            msg.innerHTML = "No hay clientes registrados!.";
+          } else {
+            msg.className = "alert alert-danger";
+            msg.innerHTML = "Ha ocurrido un error!.";
+          }
+        }
+      }
+      http.send(params);
+
+    });
+    function refresh() {
+      window.location.reload();
+    }
+  </script>
 
 </body>
 
