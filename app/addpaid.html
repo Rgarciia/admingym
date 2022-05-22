@@ -137,18 +137,43 @@
                   <input id="theBasics" type="search" class="form-control" placeholder="Escribir Correo">
                 </div><br>
                 <div class="form-group">
-                  <center><button class="btn btn-brand-02 btn-block" onclick="GetInfoUsr();"
+                  <input id="phone" type="number" class="form-control" disabled style="display: none;">
+                </div>
+                <div class="form-group">
+                  <input id="fecha_pago" type="date" class="form-control" placeholder="Selecciona Fecha"
+                    style="display: none;">
+                </div>
+                <div class="form-group">
+                  <input id="fecha_vencimiento" type="date" class="form-control" placeholder="Selecciona Fecha"
+                    style="display: none;">
+                </div>
+                <div class="form-group" style="display: none;">
+                  <select class="custom-select" id="pago">
+                    <option selected value="0">Tipo de pago</option>
+                    <option value="Efectivo">Efectivo</option>
+                    <option value="Tarjeta">Tarjeta</option>
+                    <option value="Transferencia">Transferencia</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <input id="total" type="number" class="form-control" placeholder="$ Total a Pagar"
+                    style="display: none;">
+                </div>
+                <div class="form-group">
+                  <center><button class="btn btn-brand-02 btn-block" onclick="GetInfoUsr();" id="search_row"
                       style="display: none;">Buscar</button>
                   </center>
+                </div>
+                <div class="form-group">
                   <div role="alert" id="msg">
                   </div>
                 </div>
               </div>
             </div><!-- sign-wrapper -->
             <div class="media-body pd-y-30 pd-lg-x-50 pd-xl-x-60 align-items-center d-none d-lg-flex pos-relative">
-              <div class="mx-lg-wd-500 mx-xl-wd-550" id="divResult" style="display: none;">
-                <img src="../assets/img/user-default.png" class="img-fluid" alt="" id="img">
-                <center><button class="btn btn-brand-02 btn-block" onclick="ResgistrarPaid();">Create Account</button>
+              <div class="mx-lg-wd-500 mx-xl-wd-550" id="divImg" style="display: none;">
+                <img src="" class="img-fluid" alt="" id="img"><br><br>
+                <center><button class="btn btn-brand-02 btn-block" onclick="ResgistrarPaid();">Registrar Pago</button>
                 </center>
               </div>
 
@@ -188,8 +213,9 @@
           });
 
           cb(matches);
-          $('.tt-highlight').on('click', function () {
-            console.log($(this));
+
+          $('.tt-suggestion').on('click', function () {
+            $('#search_row').show();
           });
         };
       };
@@ -234,6 +260,47 @@
       http.send(params);
 
     });
+
+    function GetInfoUsr() {
+      let http = new XMLHttpRequest();
+      let email = document.getElementById('theBasics').value;
+      let msg = document.getElementById("msg");
+      let url = '../php/get_customer.php';
+      let params = 'email=' + email;
+      http.open('POST', url, true);
+      http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+      http.onreadystatechange = function () {
+        if (http.readyState == 4 && http.status == 200) {
+          if (http.responseText != 0) {
+            let info = (JSON.parse(http.responseText));  
+            let validImg = info['FOTO'].includes('user-default.png');
+            if(validImg != true){
+              console.log('decript img');
+            }            
+            document.getElementById('phone').value = info['PHONE'];
+            document.getElementById('img').src = info['FOTO'];     
+               
+            $('#phone').show();
+            $('#fecha_pago').show();
+            $('#fecha_vencimiento').show();
+            $('#pago').show();
+            $('#total').show();
+            $('#divImg').show();
+            //window.setInterval('refresh()', 2000);
+          } else if (http.responseText == 0) {
+            msg.className = "alert alert-danger";
+            msg.innerHTML = "Cliente no registrado!.";
+          } else {
+            msg.className = "alert alert-danger";
+            msg.innerHTML = "Ha ocurrido un error!.";
+            console.log(http.responseText);
+          }
+        }
+      }
+      http.send(params);
+    }
+
     function refresh() {
       window.location.reload();
     }
