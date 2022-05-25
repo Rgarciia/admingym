@@ -10,6 +10,7 @@ $sexo=$_POST['sexo'];
 $photo=$_POST['photo'];
 $fecha=date("Y/m/d H:i:s");
 
+$fotoEncr = str_replace(" ","+",$photo);
 
 $conn = mysqli_connect($servername, $username, $password, $dbname);
 if (!$conn) {
@@ -24,7 +25,7 @@ if (!$conn) {
       }
     } else {
         $sql2 = "INSERT INTO customers (NAME, LASTNAME1, LASTNAME2, EMAIL, PHONE, SEXO, FOTO, FECHA_REGISTRO)
-        VALUES ('$name', '$lastname1', '$lastname2', '$email', '$phone', '$sexo', '$photo', '$fecha')";
+        VALUES ('$name', '$lastname1', '$lastname2', '$email', '$phone', '$sexo', '$fotoEncr', '$fecha')";
 
         if (mysqli_query($conn, $sql2)) {
         echo "0";

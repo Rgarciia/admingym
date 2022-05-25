@@ -28,6 +28,7 @@
         $('#player').hide();
         $('#btnCamera').hide();
         foto = "";
+        document.getElementById('baseimg').value = '';
         camara.apagar();
       }
     }
@@ -38,6 +39,7 @@
     btnTomarFoto.addEventListener('click', () => {
       const camara = new Camara($('#player')[0]);
       foto = camara.tomarFoto();
+      document.getElementById('baseimg').value = foto;
       camara.apagar();
       console.log('se tomo la foto')
     });
@@ -82,11 +84,11 @@
         msg.innerHTML = "";
 
         if (foto != '') {
-          fotoG = foto;
+          fotoG = document.getElementById('baseimg').value;
         } else {
-          fotoG = fotoDefault
+          fotoG = fotoDefault;
         }
-
+        
         let http = new XMLHttpRequest();
         let url = '../php/add_custom.php';
         let params = 'name=' + name + '&lastname1=' + lastname1 + '&lastname2=' + lastname2 + '&phone=' + phone + '&email=' + email + '&sexo=' + sexo.value + '&photo=' + fotoG;
@@ -98,8 +100,6 @@
             if (http.responseText == 1) {
               msg.className = "alert alert-danger";
               msg.innerHTML = "El cliente ya ha sido registrado!.";
-              //console.log(http.responseText);
-
             } else if (http.responseText == 0) {
               msg.className = "alert alert-success";
               msg.innerHTML = "El cliente ah sido registrado exitosamente!.";
