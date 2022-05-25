@@ -122,66 +122,18 @@
             <nav aria-label="breadcrumb">
               <ol class="breadcrumb breadcrumb-style1 mg-b-10">
                 <li class="breadcrumb-item"><a href="#">Pagos</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Registrar Pago</li>
+                <li class="breadcrumb-item active" aria-current="page">Listado de Pagos</li>
               </ol>
             </nav>
+            <h4 class="mg-b-0 tx-spacing--1">En este apartado puedes ver y editar los pagos.</h4>
           </div>
         </div>
 
         <div class="row row-xs">
-          <div class="media align-items-stretch justify-content-center ht-100p">
-            <div class="sign-wrapper mg-lg-r-50 mg-xl-r-60">
-              <div class="pd-t-20 wd-100p">
-                <h4 class="tx-color-01 mg-b-5">Registrar Nuevo Pago</h4>
-                <div class="search-form">
-                  <input id="theBasics" type="search" class="form-control" placeholder="Escribir Correo">
-                  <div class="form-group">
-                    <input id="idCustomer" type="hidden" class="form-control">
-                  </div>
-                </div><br>
-                <div class="form-group">
-                  <input id="phone" type="number" class="form-control" disabled style="display: none;">
-                </div>
-                <div class="form-group">
-                  <input id="fecha_pago" type="date" class="form-control" placeholder="Selecciona Fecha"
-                    style="display: none;">
-                </div>
-                <div class="form-group">
-                  <input id="fecha_vencimiento" type="date" class="form-control" placeholder="Selecciona Fecha"
-                    style="display: none;">
-                </div>
-                <div class="form-group" style="display: none;" id="pagoInfo">
-                  <select class="custom-select" id="pago">
-                    <option selected value="0">Tipo de pago</option>
-                    <option value="Efectivo">Efectivo</option>
-                    <option value="Tarjeta">Tarjeta</option>
-                    <option value="Transferencia">Transferencia</option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <input id="total" type="number" class="form-control" placeholder="$ Total a Pagar"
-                    style="display: none;">
-                </div>
-                <div class="form-group">
-                  <center><button class="btn btn-brand-02 btn-block" onclick="GetInfoUsr();" id="search_row"
-                      style="display: none;">Buscar</button>
-                  </center>
-                </div>
-                <div class="form-group">
-                  <div role="alert" id="msg">
-                  </div>
-                </div>
-              </div>
-            </div><!-- sign-wrapper -->
-            <div class="media-body pd-y-30 pd-lg-x-50 pd-xl-x-60 align-items-center d-none d-lg-flex pos-relative">
-              <div class="mx-lg-wd-500 mx-xl-wd-550" id="divImg" style="display: none;">
-                <img src="" class="img-fluid" alt="" id="img"><br><br>
-                <center><button class="btn btn-brand-02 btn-block" onclick="ResgistrarPaid();">Registrar Pago</button>
-                </center>
-              </div>
-
-            </div><!-- media-body -->
-          </div><!-- media -->
+          <div data-label="Example" class="df-example demo-table">
+            <table id="paids" class="table">
+            </table>
+          </div>
         </div><!-- row -->
       </div><!-- container -->
     </div>
@@ -191,16 +143,92 @@
   <script src="../lib/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="../lib/feather-icons/feather.min.js"></script>
   <script src="../lib/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+  <script src="../lib/datatables.net/js/jquery.dataTables.min.js"></script>
+  <script src="../lib/datatables.net-dt/js/dataTables.dataTables.min.js"></script>
+  <script src="../lib/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+  <script src="../lib/datatables.net-responsive-dt/js/responsive.dataTables.min.js"></script>
   <script src="../lib/chart.js/Chart.bundle.min.js"></script>
-  <script src="../lib/typeahead.js/typeahead.bundle.min.js"></script>
+
   <script src="../assets/js/dashforge.js"></script>
   <script src="../assets/js/dashforge.aside.js"></script>
   <script src="../assets/js/dashforge.sampledata.js"></script>
   <script src="../assets/js/session.js"></script>
-  <script src="../assets/js/add-paids.js"></script>
 
   <!-- append theme customizer -->
   <script src="../lib/js-cookie/js.cookie.js"></script>
+
+  <script>
+    $(function () {
+      'use strict'
+
+      var table = $('#paids').DataTable({
+
+        "columns": [{
+          "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+          "title": "ID",
+          "data": "ID_PAID"
+        },
+        {
+          "title": "ID CLIENTE",
+          "data": "ID_CUSTOM"
+        },
+        {
+          "title": "NOMBRE",
+          "data": "NAME"
+        },
+        {
+          "title": "EMAIL",
+          "data": "EMAIL"
+        },
+        {
+          "title": "FECHA DE PAGO",
+          "data": "FECHA_FIN"
+        },
+        {
+          "title": "FECHA DE VENCIMIENTO",
+          "data": "FECHA_FIN"
+        },
+        {
+          "title": "ESTADO",
+          "data": "ESTADO"
+        },
+        {
+          "title": "TIPO DE PAGO",
+          "data": "TIPO_PAGO"
+        },
+        {
+          "title": "$MONTO",
+          "data": "MONTO"
+        }
+        ]
+      });
+
+      let http = new XMLHttpRequest();
+      let url = '../php/get_paids.php';
+      http.open('GET', url, true);
+      http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+      http.onreadystatechange = function () {
+        if (http.readyState == 4 && http.status == 200) {
+          if (http.responseText != '') {
+            let datos = JSON.parse(http.responseText);
+            console.log(datos);
+            table.rows.add(datos['customers']).draw();
+          } else if (http.responseText == 0) {
+            msg.className = "alert alert-danger";
+            msg.innerHTML = "No hay clientes registrados!.";
+          } else {
+            msg.className = "alert alert-danger";
+            msg.innerHTML = "Ha ocurrido un error!.";
+          }
+        }
+      }
+      http.send();
+
+
+    });
+  </script>
+
 
 </body>
 

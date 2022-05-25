@@ -49,10 +49,20 @@ CREATE TABLE `paids` (
   `EMAIL` varchar(50) DEFAULT NULL,
   `FECHA_INI` date DEFAULT NULL,
   `FECHA_FIN` date DEFAULT NULL,
+  `TIPO_PAGO` varchar(20) DEFAULT NULL,
+  `MONTO` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`ID_PAID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `paids` */
+
+insert  into `paids`(`ID_PAID`,`ID_CUSTOM`,`EMAIL`,`FECHA_INI`,`FECHA_FIN`,`TIPO_PAGO`,`MONTO`) values 
+(1,39,'rene.reza_garcia@hotmail.com','2022-05-25','2022-05-26','Efectivo','123'),
+(2,40,'admin@admin.com','2022-05-26','2022-05-24','Tarjeta','12908380'),
+(3,39,'rene.reza_garcia@hotmail.com','2022-05-28','2022-06-11','Efectivo','500'),
+(4,40,'admin@admin.com','2022-05-25','2022-05-25','Efectivo','1'),
+(5,40,'admin@admin.com','2022-05-26','2022-05-26','Tarjeta','21'),
+(6,40,'admin@admin.com','2022-05-23','2022-05-28','Transferencia','12');
 
 /*Table structure for table `users` */
 
