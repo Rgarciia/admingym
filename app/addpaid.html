@@ -135,6 +135,9 @@
                 <h4 class="tx-color-01 mg-b-5">Registrar Nuevo Pago</h4>
                 <div class="search-form">
                   <input id="theBasics" type="search" class="form-control" placeholder="Escribir Correo">
+                  <div class="form-group">
+                    <input id="idCustomer" type="hidden" class="form-control">
+                  </div>
                 </div><br>
                 <div class="form-group">
                   <input id="phone" type="number" class="form-control" disabled style="display: none;">
@@ -147,7 +150,7 @@
                   <input id="fecha_vencimiento" type="date" class="form-control" placeholder="Selecciona Fecha"
                     style="display: none;">
                 </div>
-                <div class="form-group" style="display: none;">
+                <div class="form-group" style="display: none;" id="pagoInfo">
                   <select class="custom-select" id="pago">
                     <option selected value="0">Tipo de pago</option>
                     <option value="Efectivo">Efectivo</option>
@@ -262,6 +265,11 @@
     });
 
     function GetInfoUsr() {
+      document.getElementById('fecha_pago').value = '';
+      document.getElementById('fecha_vencimiento').value = '';
+      document.getElementById('total').value = '';
+      document.getElementById('pago').value = 0;
+      $('#msg').hide();
       let http = new XMLHttpRequest();
       let email = document.getElementById('theBasics').value;
       let msg = document.getElementById("msg");
@@ -273,21 +281,18 @@
       http.onreadystatechange = function () {
         if (http.readyState == 4 && http.status == 200) {
           if (http.responseText != 0) {
-            let info = (JSON.parse(http.responseText));  
-            let validImg = info['FOTO'].includes('user-default.png');
-            if(validImg != true){
-              console.log('decript img');
-            }            
+            let info = (JSON.parse(http.responseText));
             document.getElementById('phone').value = info['PHONE'];
-            document.getElementById('img').src = info['FOTO'];     
-               
+            document.getElementById('img').src = info['FOTO'];
+            document.getElementById('idCustomer').value = info['ID_CUSTOM'];
+
             $('#phone').show();
             $('#fecha_pago').show();
             $('#fecha_vencimiento').show();
-            $('#pago').show();
+            $('#pagoInfo').show();
             $('#total').show();
             $('#divImg').show();
-            //window.setInterval('refresh()', 2000);
+
           } else if (http.responseText == 0) {
             msg.className = "alert alert-danger";
             msg.innerHTML = "Cliente no registrado!.";
@@ -298,6 +303,37 @@
         }
       }
       http.send(params);
+    }
+
+    function ResgistrarPaid() {
+      let idC = document.getElementById('idCustomer').value;
+      let fecha_ini = document.getElementById('fecha_pago').value;
+      let fecha_vencimiento = document.getElementById('fecha_vencimiento').value;
+      let total = document.getElementById('total').value;
+      let em = document.getElementById('theBasics').value;
+      let pago = document.getElementById('pago').value;
+      let msg = document.getElementById("msg");
+
+      $('#msg').show();
+
+      if (fecha_ini == '' && fecha_vencimiento == '' && total == '' && pago == 0) {
+        msg.className = "alert alert-danger";
+        msg.innerHTML = "Debes llenar los campos";
+      }else if (fecha_ini == '') {
+        msg.className = "alert alert-warning";
+        msg.innerHTML = "Llenar fecha de pago";
+      }else if (fecha_vencimiento == '') {
+        msg.className = "alert alert-warning";
+        msg.innerHTML = "Llenar fecha de vencimiento";
+      }else if (pago == 0) {
+        msg.className = "alert alert-warning";
+        msg.innerHTML = "Seleccionar el tipo de pago";
+      }else if (total == '') {
+        msg.className = "alert alert-warning";
+        msg.innerHTML = "Llenar el monto";
+      }
+
+
     }
 
     function refresh() {
