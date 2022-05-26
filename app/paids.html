@@ -160,9 +160,7 @@
   <script>
     $(function () {
       'use strict'
-
       var table = $('#paids').DataTable({
-
         "columns": [{
           "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
           "title": "ID",
@@ -197,10 +195,28 @@
           "data": "TIPO_PAGO"
         },
         {
-          "title": "$MONTO",
-          "data": "MONTO"
+          data: null,
+          className: "dt-center editor-edit",
+          defaultContent: '<i class="fa fa-pen"/>',
+          orderable: false
+        },
+        {
+          data: null,
+          className: "dt-center editor-delete",
+          defaultContent: '<i class="fa fa-trash"/>',
+          orderable: false
         }
-        ]
+        ],
+        rowCallback: function (row, data, index) {
+          if (data['ESTADO'] == 'ACTIVO') {
+            $(row).find('td:eq(6)').css('color', 'green');
+            $(row).find('td:eq(6)').css('font-family', 'fantasy');
+          } else if (data['ESTADO'] == 'VENCIDO') {
+            $(row).find('td:eq(6)').css('color', 'red');
+            $(row).find('td:eq(6)').css('text-decoration', 'line-through');
+            $(row).find('td:eq(6)').css('font-family', 'fantasy');
+          }
+        }
       });
 
       let http = new XMLHttpRequest();
@@ -212,7 +228,6 @@
         if (http.readyState == 4 && http.status == 200) {
           if (http.responseText != '') {
             let datos = JSON.parse(http.responseText);
-            console.log(datos);
             table.rows.add(datos['customers']).draw();
           } else if (http.responseText == 0) {
             msg.className = "alert alert-danger";
