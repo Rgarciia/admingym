@@ -129,6 +129,41 @@
           </div>
         </div>
 
+        <div class="modal fade" id="modal6" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel6"
+          aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content tx-14">
+              <div class="modal-header">
+                <h6 class="modal-title" id="exampleModalLabel6">EDITAR PAGO</h6>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div class="form-group">
+                  <input id="name" type="text" class="form-control" disabled>
+                </div>
+                <div class="form-group">
+                  <input id="email" type="email" class="form-control" disabled>
+                </div>
+                <div class="form-group">
+                  <input id="fechaP" type="date" class="form-control">
+                </div>
+                <div class="form-group">
+                  <input id="fechaV" type="date" class="form-control">
+                </div>
+                <div class="form-group">
+                  <input id="monto" type="number" class="form-control">
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary tx-13" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary tx-13">Save changes</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div class="row row-xs">
           <div data-label="Example" class="df-example demo-table">
             <table id="paids" class="table">
@@ -196,13 +231,11 @@
         },
         {
           data: null,
-          className: "dt-center editor-edit",
-          defaultContent: '<i class="fa fa-pen"/>',
+          defaultContent: '<a href="#modal6" class="fa fa-pen Edit" data-toggle="modal" data-animation="effect-newspaper"></a>',
           orderable: false
         },
         {
           data: null,
-          className: "dt-center editor-delete",
           defaultContent: '<i class="fa fa-trash"/>',
           orderable: false
         }
@@ -229,6 +262,17 @@
           if (http.responseText != '') {
             let datos = JSON.parse(http.responseText);
             table.rows.add(datos['customers']).draw();
+            const customers = datos['customers'].map(function (custom) {
+              return custom.ID_CUSTOM;
+            });
+
+            for (let e = 0; e < customers.length; e++) {
+              var elementsList = document.querySelectorAll('.Edit');
+              for (var i = 0; i < elementsList.length; i++) {
+                elementsList[i].setAttribute('mon', customers[i]);
+              }
+            }
+
           } else if (http.responseText == 0) {
             msg.className = "alert alert-danger";
             msg.innerHTML = "No hay clientes registrados!.";
@@ -240,6 +284,17 @@
       }
       http.send();
 
+      $('#modal6').on('show.bs.modal', function (event) {
+        var animation = $(event.relatedTarget).data('animation');
+        $(this).addClass(animation);
+      })
+
+      // hide modal with effect
+      $('#modal6').on('hidden.bs.modal', function (e) {
+        $(this).removeClass(function (index, className) {
+          return (className.match(/(^|\s)effect-\S+/g) || []).join(' ');
+        });
+      });
 
     });
   </script>
