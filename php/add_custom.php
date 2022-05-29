@@ -24,8 +24,8 @@ if (!$conn) {
         echo "1";
       }
     } else {
-        $sql2 = "INSERT INTO customers (NAME, LASTNAME1, LASTNAME2, EMAIL, PHONE, SEXO, FOTO, FECHA_REGISTRO)
-        VALUES ('$name', '$lastname1', '$lastname2', '$email', '$phone', '$sexo', '$fotoEncr', '$fecha')";
+        $sql2 = "INSERT INTO customers (NAME, LASTNAME1, LASTNAME2, EMAIL, PHONE, SEXO, FOTO, FECHA_REGISTRO, STATUS)
+        VALUES ('$name', '$lastname1', '$lastname2', '$email', '$phone', '$sexo', '$fotoEncr', '$fecha', 1)";
 
         if (mysqli_query($conn, $sql2)) {
         echo "0";
