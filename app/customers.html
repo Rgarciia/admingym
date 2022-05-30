@@ -88,14 +88,14 @@
             <span>Ventas</span></a></li>
 
         <li class="nav-label mg-t-25">Administración</li>
-        <li class="nav-item with-sub">
+        <li class="nav-item with-sub active">
           <a href="" class="nav-link"><i data-feather="user"></i> <span>Clientes</span></a>
           <ul>
             <li><a href="addcustomer.html">Registrar Cliente</a></li>
             <li><a href="customers.html">Listado de Clientes</a></li>
           </ul>
         </li>
-        <li class="nav-item with-sub active">
+        <li class="nav-item with-sub">
           <a href="" class="nav-link"><i data-feather="dollar-sign"></i> <span>Pagos</span></a>
           <ul>
             <li><a href="addpaid.html">Registrar Pago</a></li>
@@ -121,11 +121,11 @@
           <div>
             <nav aria-label="breadcrumb">
               <ol class="breadcrumb breadcrumb-style1 mg-b-10">
-                <li class="breadcrumb-item"><a href="#">Pagos</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Listado de Pagos</li>
+                <li class="breadcrumb-item"><a href="#">Clientes</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Listado de Clientes</li>
               </ol>
             </nav>
-            <h4 class="mg-b-0 tx-spacing--1">En este apartado puedes editar y eliminar pagos.</h4>
+            <h4 class="mg-b-0 tx-spacing--1">En este apartado puedes ver, editar y eliminar clientes.</h4>
           </div>
         </div>
 
@@ -134,7 +134,7 @@
           <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content tx-14">
               <div class="modal-header">
-                <h6 class="modal-title" id="exampleModalLabel6">EDITAR PAGO</h6>
+                <h6 class="modal-title" id="exampleModalLabel6">EDITAR INFORMACIÓN DEL CLIENTE</h6>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -145,27 +145,44 @@
                   </div>
                 </div>
                 <div class="form-group">
-                  <input id="idP" type="hidden" class="form-control" disabled>
+                  <input id="idC" type="hidden" class="form-control" disabled>
                 </div>
                 <div class="form-group">
-                  <input id="name" type="text" class="form-control" disabled>
+                  <input id="name" type="text" class="form-control" placeholder="Escribir Nombre">
                 </div>
                 <div class="form-group">
-                  <input id="email" type="email" class="form-control" disabled>
+                  <input id="apaterno" type="text" class="form-control" placeholder="Escribir Apellido Paterno">
                 </div>
                 <div class="form-group">
-                  <input id="fechaP" type="date" class="form-control">
+                  <input id="amaterno" type="text" class="form-control" placeholder="Escribir Apellido Materno">
                 </div>
                 <div class="form-group">
-                  <input id="fechaV" type="date" class="form-control">
+                  <input id="email" type="email" class="form-control" placeholder="example@example.com" disabled>
                 </div>
                 <div class="form-group">
-                  <input id="monto" type="number" class="form-control">
+                  <input id="phone" type="number" class="form-control" placeholder="Escribir Teléfono">
+                </div>
+                <div class="form-group">
+                  <label>Sexo</label>
+                  <div class="custom-control custom-radio">
+                    <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input" value="H">
+                    <label class="custom-control-label" for="customRadio1">H</label>
+                  </div>
+                  <div class="custom-control custom-radio">
+                    <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input" value="M">
+                    <label class="custom-control-label" for="customRadio2">M</label>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <select class="custom-select" id="status">
+                    <option value="1">ACTIVO</option>
+                    <option value="0">NO ACTIVO</option>
+                  </select>
                 </div>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary tx-13" data-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-primary tx-13" onclick="UpdatePaid();">Guardar</button>
+                <button type="button" class="btn btn-primary tx-13" onclick="UpdateCustom();">Guardar</button>
               </div>
             </div>
           </div>
@@ -176,7 +193,7 @@
           <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content tx-14">
               <div class="modal-header">
-                <h6 class="modal-title" id="exampleModalLabel6">¿Estás seguro de eliminar este pago?</h6>
+                <h6 class="modal-title" id="exampleModalLabel6">¿Estás seguro de desactivar este cliente?</h6>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -188,12 +205,54 @@
                 </div>
                 <p class="mg-b-0">¡Si no lo estás puedes cancelar la acción!</p>
                 <div class="form-group">
-                  <input id="idP1" type="hidden" class="form-control" disabled>
+                  <input id="idC1" type="hidden" class="form-control" disabled>
                 </div>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary tx-13" data-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-danger tx-13" onclick="DeletePaid();">Eliminar</button>
+                <button type="button" class="btn btn-danger tx-13" onclick="DeletePaid();">Desactivar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal fade" id="view" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel6"
+          aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content tx-14">
+              <div class="modal-header">
+                <h6 class="modal-title" id="exampleModalLabel6">Informacióno del Cliente</h6>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div class="card custom-card p-0">
+                  <div class="card-profile"><center><img class="rounded-circle" src="" alt="" id="img"></center></div>
+
+                  <div class="text-center profile-details">
+                    <h5><p id="nameCustomer"></p></h5>
+                    <h6><p id="emailCustomer"></p></h6>
+                  </div>
+                  <div class="card-footer row">
+                    <div class="col-4 col-sm-4">
+                      <h6>Teléfono</h6>
+                      <h5><p id="phoneCustomer"> </p></h5>
+                    </div>
+                    <div class="col-4 col-sm-4">
+                      <h6>Estado</h6>
+                      <label class="" type="button" id="statusCustomer" title="" data-bs-original-title="Activo"
+                        data-original-title="Activo"></label>
+                    </div>
+                    <div class="col-4 col-sm-4">
+                      <h6>Último pago</h6>
+                      <h5><p id="fechaPago"></p></h5>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary tx-13" data-dismiss="modal">Cerrar</button>
               </div>
             </div>
           </div>
@@ -201,7 +260,7 @@
 
         <div class="row row-xs">
           <div data-label="Example" class="df-example demo-table">
-            <table id="paids" class="table">
+            <table id="customers" class="table">
             </table>
           </div>
         </div><!-- row -->
@@ -222,7 +281,7 @@
   <script src="../assets/js/dashforge.js"></script>
   <script src="../assets/js/dashforge.aside.js"></script>
   <script src="../assets/js/dashforge.sampledata.js"></script>
-  <script src="../assets/js/paids.js"></script>
+  <script src="../assets/js/customers.js"></script>
   <script src="../assets/js/session.js"></script>
 
   <!-- append theme customizer -->
