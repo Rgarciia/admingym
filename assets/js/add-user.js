@@ -56,9 +56,11 @@
       let phone = document.getElementById('phone').value;
       let email = document.getElementById('email').value;
       let msg = document.getElementById("msg");
-      let sexo = document.querySelector('input[name="customRadio"]:checked');
+      let role = document.getElementById("role1").value;
+      let pass1 = document.getElementById("pass1").value;
+      let pass2 = document.getElementById("pass2").value;
 
-      if (name == "" & lastname1 == "" & lastname2 == "" & phone == "" & email == "" & sexo == null) {
+      if (name == "" & lastname1 == "" & lastname2 == "" & phone == "" & email == "" & role == 0 & pass1 == "" & pass2 == "") {
         msg.className = "alert alert-danger";
         msg.innerHTML = "Llenar los datos solicitados!.";
       } else if (name == "") {
@@ -76,9 +78,18 @@
       } else if (email == "") {
         msg.className = "alert alert-warning";
         msg.innerHTML = "Llenar Correo!.";
-      } else if (sexo == null) {
+      } else if (role == "0") {
         msg.className = "alert alert-warning";
-        msg.innerHTML = "Seleccionar Sexo!.";
+        msg.innerHTML = "Seleccionar Tipo de Usuario!.";
+      }else if (pass1 == "") {
+        msg.className = "alert alert-warning";
+        msg.innerHTML = "Llenar Contraseña!.";
+      }else if (pass2 == "") {
+        msg.className = "alert alert-warning";
+        msg.innerHTML = "Repetir Contraseña!.";
+      }else if (pass1 != pass2) {
+        msg.className = "alert alert-warning";
+        msg.innerHTML = "Las contraseñas no coinciden, intentar de nuevo!.";
       }else {
         msg.className = "spinner-border text-success";
         msg.innerHTML = "";
@@ -90,8 +101,8 @@
         }
         
         let http = new XMLHttpRequest();
-        let url = '../php/add_custom.php';
-        let params = 'name=' + name + '&lastname1=' + lastname1 + '&lastname2=' + lastname2 + '&phone=' + phone + '&email=' + email + '&sexo=' + sexo.value + '&photo=' + fotoG;
+        let url = '../php/add_user.php';
+        let params = 'name=' + name + '&lastname1=' + lastname1 + '&lastname2=' + lastname2 + '&phone=' + phone + '&email=' + email + '&role=' + role + '&pass1=' + pass1 + '&photo=' + fotoG;
         http.open('POST', url, true);
         http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 
@@ -99,10 +110,10 @@
           if (http.readyState == 4 && http.status == 200) {
             if (http.responseText == 1) {
               msg.className = "alert alert-danger";
-              msg.innerHTML = "El cliente ya ha sido registrado!.";
+              msg.innerHTML = "El usuario ya ha sido registrado!.";
             } else if (http.responseText == 0) {
               msg.className = "alert alert-success";
-              msg.innerHTML = "El cliente ah sido registrado exitosamente!.";
+              msg.innerHTML = "El usuario ah sido registrado exitosamente!.";
               window.setInterval('refresh()', 2000);
             } else {
               msg.className = "alert alert-danger";

@@ -2,7 +2,7 @@
 include("../db/dbconnect.php");
 
 $email=$_POST['email'];
-$pass=$_POST['password'];
+$pass=md5($_POST['password']);
 $tipo=$_POST['tipo'];
 
 

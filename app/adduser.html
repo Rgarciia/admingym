@@ -88,14 +88,14 @@
             <span>Ventas</span></a></li>
 
         <li class="nav-label mg-t-25">Administración</li>
-        <li class="nav-item with-sub active">
+        <li class="nav-item with-sub">
           <a href="" class="nav-link"><i data-feather="user"></i> <span>Clientes</span></a>
           <ul>
             <li><a href="addcustomer.html">Registrar Cliente</a></li>
             <li><a href="customers.html">Listado de Clientes</a></li>
           </ul>
         </li>
-        <li class="nav-item with-sub">
+        <li class="nav-item with-sub active">
           <a href="" class="nav-link"><i data-feather="user"></i> <span>Usuarios</span></a>
           <ul>
             <li><a href="adduser.html">Registrar Usuarios</a></li>
@@ -128,148 +128,87 @@
           <div>
             <nav aria-label="breadcrumb">
               <ol class="breadcrumb breadcrumb-style1 mg-b-10">
-                <li class="breadcrumb-item"><a href="#">Clientes</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Listado de Clientes</li>
+                <li class="breadcrumb-item"><a href="#">Usuarios</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Registrar Cliente</li>
               </ol>
             </nav>
-            <h4 class="mg-b-0 tx-spacing--1">En este apartado puedes ver, editar y desactivar clientes.</h4>
-          </div>
-        </div>
-
-        <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel6"
-          aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content tx-14">
-              <div class="modal-header">
-                <h6 class="modal-title" id="exampleModalLabel6">EDITAR INFORMACIÓN DEL CLIENTE</h6>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                <div class="form-group">
-                  <div role="alert" id="msg">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <input id="idC" type="hidden" class="form-control" disabled>
-                </div>
-                <div class="form-group">
-                  <input id="name" type="text" class="form-control" placeholder="Escribir Nombre">
-                </div>
-                <div class="form-group">
-                  <input id="apaterno" type="text" class="form-control" placeholder="Escribir Apellido Paterno">
-                </div>
-                <div class="form-group">
-                  <input id="amaterno" type="text" class="form-control" placeholder="Escribir Apellido Materno">
-                </div>
-                <div class="form-group">
-                  <input id="email" type="email" class="form-control" placeholder="example@example.com" disabled>
-                </div>
-                <div class="form-group">
-                  <input id="phone" type="number" class="form-control" placeholder="Escribir Teléfono">
-                </div>
-                <div class="form-group">
-                  <label>Sexo</label>
-                  <div class="custom-control custom-radio">
-                    <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input" value="H">
-                    <label class="custom-control-label" for="customRadio1">H</label>
-                  </div>
-                  <div class="custom-control custom-radio">
-                    <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input" value="M">
-                    <label class="custom-control-label" for="customRadio2">M</label>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <select class="custom-select" id="status">
-                    <option value="1">ACTIVO</option>
-                    <option value="0">NO ACTIVO</option>
-                  </select>
-                </div>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary tx-13" data-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-primary tx-13" onclick="UpdateCustom();">Guardar</button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel6"
-          aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content tx-14">
-              <div class="modal-header">
-                <h6 class="modal-title" id="exampleModalLabel6">¿Estás seguro de desactivar este cliente?</h6>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                <div class="form-group">
-                  <div role="alert" id="msg2">
-                  </div>
-                </div>
-                <p class="mg-b-0">¡Si no lo estás puedes cancelar la acción!</p>
-                <div class="form-group">
-                  <input id="idC1" type="hidden" class="form-control" disabled>
-                </div>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary tx-13" data-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-danger tx-13" onclick="DeletePaid();">Desactivar</button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="modal fade" id="view" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel6"
-          aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content tx-14">
-              <div class="modal-header">
-                <h6 class="modal-title" id="exampleModalLabel6">Informacióno del Cliente</h6>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                <div class="card custom-card p-0">
-                  <div class="card-profile"><center><img class="rounded-circle" src="" alt="" id="img"></center></div>
-
-                  <div class="text-center profile-details">
-                    <h5><p id="nameCustomer"></p></h5>
-                    <h6><p id="emailCustomer"></p></h6>
-                  </div>
-                  <div class="card-footer row">
-                    <div class="col-4 col-sm-4">
-                      <h6>Teléfono</h6>
-                      <h5><p id="phoneCustomer"> </p></h5>
-                    </div>
-                    <div class="col-4 col-sm-4">
-                      <h6>Estado</h6>
-                      <label class="" type="button" id="statusCustomer" title="" data-bs-original-title="Activo"
-                        data-original-title="Activo"></label>
-                    </div>
-                    <div class="col-4 col-sm-4">
-                      <h6>Último pago</h6>
-                      <h5><p id="fechaPago"></p></h5>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary tx-13" data-dismiss="modal">Cerrar</button>
-              </div>
-            </div>
           </div>
         </div>
 
         <div class="row row-xs">
-          <div data-label="Example" class="df-example demo-table">
-            <table id="customers" class="table">
-            </table>
-          </div>
+          <div class="media align-items-stretch justify-content-center ht-100p">
+            <div class="sign-wrapper mg-lg-r-50 mg-xl-r-60">
+              <div class="pd-t-20 wd-100p">
+                <h4 class="tx-color-01 mg-b-5">Registrar Nuevo Usuario</h4>
+                <p class="tx-color-03 tx-16 mg-b-40">Puedes activar la camara para tomar una fotografía!</p>
+
+                <div class="form-group">
+                  <label>Nombre<span class="tx-danger">*</span></label>
+                  <input type="text" class="form-control" placeholder="Escribir Nombre" id="name">
+                </div>
+                <div class="form-group">
+                  <div class="d-flex justify-content-between mg-b-5">
+                    <label class="mg-b-0-f">Apellido Paterno<span class="tx-danger">*</span></label>
+                  </div>
+                  <input type="text" class="form-control" placeholder="Escribir Apellido" id="lastname1">
+                </div>
+                <div class="form-group">
+                  <label>Apellido Materno<span class="tx-danger">*</span></label>
+                  <input type="text" class="form-control" placeholder="Escribir Apellido" id="lastname2">
+                </div>
+                <div class="form-group">
+                  <label>N° de Télefono<span class="tx-danger">*</span></label>
+                  <input type="number" class="form-control" placeholder="Escribir Télefono" id="phone">
+                </div>
+                <div class="form-group">
+                  <label>Correo<span class="tx-danger">*</span></label>
+                  <input type="email" class="form-control" placeholder="example@example.com" id="email">
+                </div>
+                <div class="form-group">
+                  <select class="custom-select" id="role1">
+                    <option selected value="0">Tipo de usuario</option>
+                    <option value="Admin">Administrador</option>
+                    <option value="User">Usuario</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>Contraseña<span class="tx-danger">*</span></label>
+                  <input type="password" class="form-control" placeholder="Contraseña" id="pass1">
+                </div>
+                <div class="form-group">
+                  <label>Repetir Contraseña<span class="tx-danger">*</span></label>
+                  <input type="password" class="form-control" placeholder="Repetir Contraseña" id="pass2">
+                </div>
+                <div class="form-group custom-control custom-switch">
+                  <input type="checkbox" class="custom-control-input" id="customSwitch1" onclick="activarCamara()">
+                  <label class="custom-control-label" for="customSwitch1">Activar la camara</label>
+                </div>
+                <div class="form-group">
+                  <div role="alert" id="msg">
+                  </div>
+                </div>
+
+                <button class="btn btn-brand-02 btn-block" onclick="GuardarCli();">Registrar Usuario</button>
+
+
+              </div>
+            </div><!-- sign-wrapper -->
+            <div class="media-body pd-y-30 pd-lg-x-50 pd-xl-x-60 align-items-center d-none d-lg-flex pos-relative">
+              <div class="mx-lg-wd-500 mx-xl-wd-550" id="divCamera">
+                <img src="../assets/img/user-default.png" class="img-fluid" alt="" id="img">
+                <video id="player" autoplay=""></video><br>
+                <center><button class="btn btn-brand-02 btn-block btn-pill btn-outline-success-2x btn-air-success"
+                    type="button" data-bs-original-title="Tomar foto" data-original-title="Tomar foto" id="btnCamera"
+                    style="display: none;">
+                    <i class="fa fa-camera"></i> Tomar Foto</button>
+                </center>
+                <br>
+                <textarea name="w3review" rows="4" cols="50" id="baseimg" style="display: none;">
+                  </textarea>
+              </div>
+
+            </div><!-- media-body -->
+          </div><!-- media -->
         </div><!-- row -->
       </div><!-- container -->
     </div>
@@ -279,16 +218,12 @@
   <script src="../lib/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="../lib/feather-icons/feather.min.js"></script>
   <script src="../lib/perfect-scrollbar/perfect-scrollbar.min.js"></script>
-  <script src="../lib/datatables.net/js/jquery.dataTables.min.js"></script>
-  <script src="../lib/datatables.net-dt/js/dataTables.dataTables.min.js"></script>
-  <script src="../lib/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
-  <script src="../lib/datatables.net-responsive-dt/js/responsive.dataTables.min.js"></script>
-  <script src="../lib/chart.js/Chart.bundle.min.js"></script>
 
   <script src="../assets/js/dashforge.js"></script>
   <script src="../assets/js/dashforge.aside.js"></script>
   <script src="../assets/js/dashforge.sampledata.js"></script>
-  <script src="../assets/js/customers.js"></script>
+  <script src="../assets/js/camara-class.js"></script>
+  <script src="../assets/js/add-user.js"></script>
   <script src="../assets/js/session.js"></script>
 
   <!-- append theme customizer -->
