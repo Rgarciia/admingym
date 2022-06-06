@@ -2,15 +2,19 @@
 include("../db/dbconnect.php");
 
 $id=$_POST['id'];
-$foto=$_POST['foto'];
+$email=$_POST['email'];
+$name=$_POST['name'];
+$apaterno=$_POST['lastname1'];
+$amaterno=$_POST['lastname2'];
+$phone=$_POST['phone'];
 
-$fotoEncr = str_replace(" ","+",$foto);
 
 $conn = mysqli_connect($servername, $username, $password, $dbname);
 if (!$conn) {
   die("Connection failed: " . mysqli_connect_error());
 }else{
-        $sql2 = "UPDATE users SET PHOTO = '$fotoEncr' WHERE ID_USER = '$id'";
+        $sql2 = "UPDATE users SET NAME = '$name', LASTNAME1 = '$apaterno', LASTNAME2 = '$amaterno', EMAIL = '$email', 
+        PHONE = '$phone' WHERE ID_USER=$id";
         if (mysqli_query($conn, $sql2)) {
         echo "1";
         } else {

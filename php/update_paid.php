@@ -12,7 +12,7 @@ if (!$conn) {
   die("Connection failed: " . mysqli_connect_error());
 }else{
         $sql2 = "UPDATE paids SET FECHA_INI = '$fecha_ini', FECHA_FIN = '$fecha_vencimiento', MONTO = '$total'
-        WHERE ID_PAID=$id AND EMAIL = '$email'";
+        WHERE ID_PAID=$id";
         if (mysqli_query($conn, $sql2)) {
         echo "1";
         } else {

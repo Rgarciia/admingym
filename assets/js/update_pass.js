@@ -1,7 +1,23 @@
-let user = sessionStorage.getItem('username');
-let foto = sessionStorage.getItem('foto');
-let msg = document.getElementById("msg");
-document.getElementById('img').src = foto;
+let userID = sessionStorage.getItem('ID_USER');
+let https = new XMLHttpRequest();
+let urls = '../php/get_usr_data.php';
+let param = 'ID_USER=' + userID;
+
+https.open('POST', urls, true);
+https.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+https.onreadystatechange = function () {
+    if (https.readyState == 4 && https.status == 200) {
+        if (https.responseText != 0) {
+            datos = JSON.parse(https.responseText);
+            document.getElementById('img').src = datos['PHOTO'];
+
+        } else {
+            msg.className = "alert alert-danger";
+            msg.innerHTML = "Error al foto información!.";
+          }
+    }
+}
+https.send(param);
 
 
 function ChangePass() {
@@ -24,7 +40,7 @@ function ChangePass() {
 
         let https = new XMLHttpRequest();
         let urls = '../php/update_pass.php';
-        let parameters = 'email=' + user + '&pass=' + pass1;
+        let parameters = 'id=' + userID + '&pass=' + pass1;
 
         https.open('POST', urls, true);
         https.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');

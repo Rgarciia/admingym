@@ -30,10 +30,10 @@ function DoLogin() {
         if (http.readyState == 4 && http.status == 200) {
           if (http.responseText != 0) {
             datos = JSON.parse(http.responseText);
-            sessionStorage.setItem("username", datos['EMAIL']);
-            sessionStorage.setItem("id", datos['ID_USER']);
-            sessionStorage.setItem("foto", datos['PHOTO']);
-            sessionStorage.setItem("role", datos['ROLE']);
+            //sessionStorage.setItem("username", datos['EMAIL']);
+            sessionStorage.setItem("ID_USER", datos['ID_USER']);
+            //sessionStorage.setItem("foto", datos['PHOTO']);
+            //sessionStorage.setItem("role", datos['ROLE']);
             location.replace("app/index.html");
           }
           msg.className = "alert alert-danger";
