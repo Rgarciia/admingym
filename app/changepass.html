@@ -185,57 +185,11 @@
     <script src="../assets/js/dashforge.js"></script>
     <script src="../assets/js/dashforge.aside.js"></script>
     <script src="../assets/js/dashforge.sampledata.js"></script>
+    <script src="../assets/js/update_pass.js"></script>
     <script src="../assets/js/session.js"></script>
 
     <!-- append theme customizer -->
     <script src="../lib/js-cookie/js.cookie.js"></script>
-
-    <script>
-        let user = sessionStorage.getItem('username');
-        let foto = sessionStorage.getItem('foto');
-        let msg = document.getElementById("msg");
-        document.getElementById('img').src = foto;
-
-
-        function ChangePass() {
-            let pass1 = document.getElementById("pass1").value;
-            let pass2 = document.getElementById("pass2").value;
-
-            if (pass1 == '' && pass2 == '') {
-                msg.className = "alert alert-danger";
-                msg.innerHTML = "Llenar los datos solicitados!.";
-            } else if (pass1 == '') {
-                msg.className = "alert alert-warning";
-                msg.innerHTML = "Llenar Contraseña!.";
-            } else if (pass2 == '') {
-                msg.className = "alert alert-warning";
-                msg.innerHTML = "Repetir Contraseña!.";
-            } else if(pass1 != pass2) {
-                msg.className = "alert alert-warning";
-                msg.innerHTML = "Las contraseñas no coinciden!.";
-            }else {
-                let parameters = 'user=' + user + '&con=' + pass1;
-                let https = new XMLHttpRequest();
-                let urls = '../php/update_pass.php';
-                
-                https.open('POST', urls, true);
-                https.onreadystatechange = function () {
-                    if (https.readyState == 4 && https.status == 200) {
-                        if (https.responseText == 1) {
-                            msg.className = "alert alert-success";
-                            msg.innerHTML = "La constraseña fue actualizada!.";
-                        }
-                        msg.className = "alert alert-danger";
-                        msg.innerHTML = "Error al actualizar contraseña!.";
-                        console.log(https.responseText);
-                    }
-                }
-                https.send(parameters);
-
-            }
-        }
-
-    </script>
 
 </body>
 

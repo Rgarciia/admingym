@@ -1,8 +1,8 @@
 <?php
 include("../db/dbconnect.php");
 
-$email=$_POST['user'];
-$pass=md5($_POST['con']);
+$email=$_POST['email'];
+$pass=md5($_POST['pass']);
 
 $conn = mysqli_connect($servername, $username, $password, $dbname);
 if (!$conn) {
