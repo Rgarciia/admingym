@@ -74,12 +74,13 @@
                 </div>
                 <div class="collapse" id="loggedinMenu">
                     <ul class="nav nav-aside mg-b-0">
-                        <li class="nav-item"><a href="updatephoto.html" class="nav-link"><i data-feather="camera"></i>
+                        <li class="nav-item active"><a href="updatephoto.html" class="nav-link"><i
+                                    data-feather="camera"></i>
                                 <span>Actualizar Foto</span></a></li>
                         <li class="nav-item"><a href="showprofile.html" class="nav-link"><i data-feather="user"></i>
-                                <span>Ver Perfil</span></a></li>
-                        <li class="nav-item active"><a href="changepass.html" class="nav-link"><i
-                                    data-feather="settings"></i>
+                                <span>Ver
+                                    Perfil</span></a></li>
+                        <li class="nav-item"><a href="changepass.html" class="nav-link"><i data-feather="settings"></i>
                                 <span>Cambiar Contraseña</span></a></li>
                     </ul>
                 </div>
@@ -131,7 +132,7 @@
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb breadcrumb-style1 mg-b-10">
                                 <li class="breadcrumb-item"><a href="#">Usuario</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Cambiar Contraseña</li>
+                                <li class="breadcrumb-item active" aria-current="page">Cambiar Foto</li>
                             </ol>
                         </nav>
                     </div>
@@ -141,24 +142,24 @@
                     <div class="media align-items-stretch justify-content-center ht-100p">
                         <div class="sign-wrapper mg-lg-r-50 mg-xl-r-60">
                             <div class="pd-t-20 wd-100p">
-                                <h4 class="tx-color-01 mg-b-5">Cambiar nueva contraseña</h4>
+                                <h4 class="tx-color-01 mg-b-5">Cambiar Fotografía</h4>
+                                <p class="tx-color-03 tx-16 mg-b-40">Puedes activar la camara para tomar una fotografía!
+                                </p>
 
-                                <div class="form-group">
-                                    <label>Nueva Contraseña<span class="tx-danger">*</span></label>
-                                    <input type="password" class="form-control" placeholder="Contraseña" id="pass1">
-                                </div>
-                                <div class="form-group">
-                                    <label>Repetir Contraseña<span class="tx-danger">*</span></label>
-                                    <input type="password" class="form-control" placeholder="Repetir Contraseña"
-                                        id="pass2">
+
+                                <div class="form-group custom-control custom-switch">
+                                    <input type="checkbox" class="custom-control-input" id="customSwitch1"
+                                        onclick="activarCamara()">
+                                    <label class="custom-control-label" for="customSwitch1">Activar la camara</label>
                                 </div>
                                 <div class="form-group">
                                     <div role="alert" id="msg">
                                     </div>
                                 </div>
 
-                                <button class="btn btn-brand-02 btn-block" onclick="ChangePass();">Actualizar
-                                    Contraseña</button>
+                                <button class="btn btn-brand-02 btn-block" onclick="UpdatePhoto();">Actualizar
+                                    Foto</button>
+
 
                             </div>
                         </div><!-- sign-wrapper -->
@@ -166,6 +167,16 @@
                             class="media-body pd-y-30 pd-lg-x-50 pd-xl-x-60 align-items-center d-none d-lg-flex pos-relative">
                             <div class="mx-lg-wd-500 mx-xl-wd-550" id="divCamera">
                                 <img src="../assets/img/user-default.png" class="img-fluid" alt="" id="img">
+                                <video id="player" autoplay=""></video><br>
+                                <center><button
+                                        class="btn btn-brand-02 btn-block btn-pill btn-outline-success-2x btn-air-success"
+                                        type="button" data-bs-original-title="Tomar foto"
+                                        data-original-title="Tomar foto" id="btnCamera" style="display: none;">
+                                        <i class="fa fa-camera"></i> Tomar Foto</button>
+                                </center>
+                                <br>
+                                <textarea name="w3review" rows="4" cols="50" id="baseimg" style="display: none;">
+                  </textarea>
                             </div>
 
                         </div><!-- media-body -->
@@ -183,11 +194,88 @@
     <script src="../assets/js/dashforge.js"></script>
     <script src="../assets/js/dashforge.aside.js"></script>
     <script src="../assets/js/dashforge.sampledata.js"></script>
-    <script src="../assets/js/update_pass.js"></script>
+    <script src="../assets/js/camara-class.js"></script>
     <script src="../assets/js/session.js"></script>
 
     <!-- append theme customizer -->
     <script src="../lib/js-cookie/js.cookie.js"></script>
+    <script>
+        let user = sessionStorage.getItem('username');
+        let fotoUser = sessionStorage.getItem('foto');
+        let msg = document.getElementById("msg");
+        document.getElementById('img').src = fotoUser;
+
+        const btnTomarFoto = document.getElementById('btnCamera');
+        var foto = "";
+        var fotoG = "";
+
+
+        /*=============================================
+        ACTIVAR LA CAMARA
+        =============================================*/
+        const activarCamara = () => {
+            const activar = document.getElementById('customSwitch1').checked;
+            const divCamera = document.getElementById('divCamera');
+            const camara = new Camara($('#player')[0]);
+            console.log(activar)
+
+            if (activar === true) {
+                console.log('activando la camara');
+                $('#img').hide();
+                $('#player').show();
+                $('#btnCamera').show();
+                camara.encender();
+            } else {
+                console.log('apagar la camara');
+                $('#img').show();
+                $('#player').hide();
+                $('#btnCamera').hide();
+                foto = "";
+                document.getElementById('baseimg').value = '';
+                camara.apagar();
+            }
+        }
+
+        /*=============================================
+        Tomar Foto
+        =============================================*/
+        btnTomarFoto.addEventListener('click', () => {
+            const camara = new Camara($('#player')[0]);
+            foto = camara.tomarFoto();
+            document.getElementById('baseimg').value = foto;
+            camara.apagar();
+            console.log('se tomo la foto')
+        });
+
+        function UpdatePhoto() {
+
+            if (foto != '') {
+                fotoG = document.getElementById('baseimg').value;
+            } else {
+                fotoG = fotoUser;
+            }
+
+            let https = new XMLHttpRequest();
+            let urls = '../php/update_photo.php';
+            let parameters = 'email=' + user + '&foto=' + fotoG;
+
+            https.open('POST', urls, true);
+            https.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+            https.onreadystatechange = function () {
+                if (https.readyState == 4 && https.status == 200) {
+                    if (https.responseText == 1) {
+                        msg.className = "alert alert-success";
+                        msg.innerHTML = "La foto fue actualizada!.";
+                    } else {
+                        msg.className = "alert alert-danger";
+                        msg.innerHTML = "Error al actualizar foto!.";
+                    }
+                }
+            }
+            https.send(parameters);
+        }
+
+    </script>
 
 </body>
 
