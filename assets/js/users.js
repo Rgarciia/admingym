@@ -4,7 +4,7 @@ $(function () {
         "columns": [{
             "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
             "title": "ID",
-            "data": "ID_CUSTOM"
+            "data": "ID_USER"
         },
         {
             "title": "NOMBRE",
@@ -17,10 +17,6 @@ $(function () {
         {
             "title": "TELÉFONO",
             "data": "PHONE"
-        },
-        {
-            "title": "SEXO",
-            "data": "SEXO"
         },
         {
             "title": "ESTADO",
@@ -48,18 +44,18 @@ $(function () {
         ],
         rowCallback: function (row, data, index) {
             if (data['ESTADO'] == "ACTIVO") {
-                $(row).find('td:eq(5)').css('color', 'green');
-                $(row).find('td:eq(5)').css('font-family', 'fantasy');
+                $(row).find('td:eq(4)').css('color', 'green');
+                $(row).find('td:eq(4)').css('font-family', 'fantasy');
             } else if (data['ESTADO'] == "NO ACTIVO") {
-                $(row).find('td:eq(5)').css('color', 'red');
-                $(row).find('td:eq(5)').css('text-decoration', 'line-through');
-                $(row).find('td:eq(5)').css('font-family', 'fantasy');
+                $(row).find('td:eq(4)').css('color', 'red');
+                $(row).find('td:eq(4)').css('text-decoration', 'line-through');
+                $(row).find('td:eq(4)').css('font-family', 'fantasy');
             }
         }
     });
 
     let http = new XMLHttpRequest();
-    let url = '../php/get_customers_list.php';
+    let url = '../php/get_users_list.php';
     http.open('GET', url, true);
     http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 
@@ -69,7 +65,7 @@ $(function () {
                 let datos = JSON.parse(http.responseText);
                 table.rows.add(datos['customers']).draw();
                 const customers = datos['customers'].map(function (custom) {
-                    return custom.ID_CUSTOM;
+                    return custom.ID_USER;
                 });
 
                 for (let e = 0; e < customers.length; e++) {
@@ -98,7 +94,7 @@ $(function () {
         let idCustom = $(event.relatedTarget).data('id');
         let msg = document.getElementById("msg");
         let http = new XMLHttpRequest();
-        let url = '../php/get_custom.php';
+        let url = '../php/get_usr_info.php';
         let params = 'idCustom=' + idCustom;
         document.getElementById("idC").value = idCustom;
         http.open('POST', url, true);
@@ -113,9 +109,8 @@ $(function () {
                     document.getElementById("amaterno").value = JSON.parse(http.responseText)['LASTNAME2'];
                     document.getElementById("phone").value = JSON.parse(http.responseText)['PHONE'];
                     document.getElementById("email").value = JSON.parse(http.responseText)['EMAIL'];
+                    document.getElementById("rol").value = JSON.parse(http.responseText)['ROLE'];
                     document.getElementById("status").value = JSON.parse(http.responseText)['STATUS'];
-                    let radioOption = jQuery("input:radio[value=" + JSON.parse(http.responseText)['SEXO'] + "]");
-                    radioOption.prop("checked", true);
                 } else {
                     msg.className = "alert alert-danger";
                     msg.innerHTML = "Ha ocurrido un error!.";
@@ -152,7 +147,7 @@ $(function () {
         $(this).addClass(animation);
         let idC3 = $(event.relatedTarget).data('id');
         let http = new XMLHttpRequest();
-        let url = '../php/info_custom.php';
+        let url = '../php/info_user.php';
         let params = 'id=' + idC3;
         http.open('POST', url, true);
         http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
@@ -163,8 +158,8 @@ $(function () {
                     document.getElementById("nameCustomer").innerHTML = JSON.parse(http.responseText)['NAME'];
                     document.getElementById("emailCustomer").innerHTML = JSON.parse(http.responseText)['EMAIL'];
                     document.getElementById("phoneCustomer").innerHTML = JSON.parse(http.responseText)['PHONE'];
-                    document.getElementById("fechaPago").innerHTML = JSON.parse(http.responseText)['FECHA_INI'];
-                    document.getElementById('img').src = JSON.parse(http.responseText)['FOTO'];
+                    document.getElementById("fechaPago").innerHTML = JSON.parse(http.responseText)['FECHA_REGISTRO'];
+                    document.getElementById('img').src = JSON.parse(http.responseText)['PHOTO'];
                     var element = document.getElementById("statusCustomer");
                     element.innerHTML = JSON.parse(http.responseText)['ESTADO'];
                     if(JSON.parse(http.responseText)['ESTADO'] == 'ACTIVO'){
@@ -191,7 +186,7 @@ $(function () {
 
 });
 
-function UpdateCustom() {
+function UpdateUser() {
     let idCu = document.getElementById("idC").value;
     let email = document.getElementById("email").value;
     let name = document.getElementById("name").value;
@@ -199,11 +194,11 @@ function UpdateCustom() {
     let amaterno = document.getElementById("amaterno").value;
     let phone = document.getElementById("phone").value;
     let status = document.getElementById("status").value;
-    let sexo = document.querySelector('input[name="customRadio"]:checked').value;
+    let role = document.getElementById("rol").value;
     let msg = document.getElementById("msg");
     let http = new XMLHttpRequest();
-    let url = '../php/update_customer.php';
-    let params = 'idCu=' + idCu + '&email=' + email + '&name=' + name + '&apaterno=' + apaterno + '&amaterno=' + amaterno + '&phone=' + phone + '&status=' + status + '&sexo=' + sexo;
+    let url = '../php/update_user.php';
+    let params = 'idCu=' + idCu + '&email=' + email + '&name=' + name + '&apaterno=' + apaterno + '&amaterno=' + amaterno + '&phone=' + phone + '&status=' + status + '&role=' + role;
 
     if (name == '' && email == '' && apaterno == '' && amaterno == '' && phone == '') {
         msg.className = "alert alert-warning";
@@ -228,9 +223,10 @@ function UpdateCustom() {
             if (http.readyState == 4 && http.status == 200) {
                 if (http.responseText == 1) {
                     msg.className = "alert alert-success";
-                    msg.innerHTML = "El cliente se ha actualizado exitosamente!.";
+                    msg.innerHTML = "El usuario se ha actualizado exitosamente!.";
                     window.setInterval('refresh()', 2000);
                 } else {
+                    console.log(http.response);
                     msg.className = "alert alert-danger";
                     msg.innerHTML = "Ha ocurrido un error al actualizar información!.";
                 }
@@ -240,11 +236,11 @@ function UpdateCustom() {
     }
 }
 
-function DeletePaid() {
+function DeleteUser() {
     let idcus = document.getElementById("idC1").value;
     let msg = document.getElementById("msg2");
     let http = new XMLHttpRequest();
-    let url = '../php/delete_customer.php';
+    let url = '../php/delete_user.php';
     let params = 'idcus=' + idcus;
     http.open('POST', url, true);
     http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
@@ -253,7 +249,7 @@ function DeletePaid() {
         if (http.readyState == 4 && http.status == 200) {
             if (http.responseText == 1) {
                 msg.className = "alert alert-success";
-                msg.innerHTML = "El Cliente se ha desactivado exitosamente!.";
+                msg.innerHTML = "El usuario se ha desactivado exitosamente!.";
                 window.setInterval('refresh()', 2000);
             } else {
                 msg.className = "alert alert-danger";

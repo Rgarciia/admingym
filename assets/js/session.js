@@ -7,7 +7,6 @@ let http = new XMLHttpRequest();
 let url = '../php/get_usr_data.php';
 let params = 'email=' + username;
 
-
 http.open('POST', url, true);
 http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 

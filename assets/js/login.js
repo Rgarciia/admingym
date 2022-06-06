@@ -31,6 +31,8 @@ function DoLogin() {
           if (http.responseText != 0) {
             datos = JSON.parse(http.responseText);
             sessionStorage.setItem("username", datos['EMAIL']);
+            sessionStorage.setItem("id", datos['ID_USER']);
+            sessionStorage.setItem("foto", datos['PHOTO']);
             sessionStorage.setItem("role", datos['ROLE']);
             location.replace("app/index.html");
           }

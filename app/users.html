@@ -164,21 +164,16 @@
                   <input id="amaterno" type="text" class="form-control" placeholder="Escribir Apellido Materno">
                 </div>
                 <div class="form-group">
-                  <input id="email" type="email" class="form-control" placeholder="example@example.com" disabled>
+                  <input id="email" type="email" class="form-control" placeholder="example@example.com">
                 </div>
                 <div class="form-group">
                   <input id="phone" type="number" class="form-control" placeholder="Escribir Teléfono">
                 </div>
                 <div class="form-group">
-                  <label>Sexo</label>
-                  <div class="custom-control custom-radio">
-                    <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input" value="H">
-                    <label class="custom-control-label" for="customRadio1">H</label>
-                  </div>
-                  <div class="custom-control custom-radio">
-                    <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input" value="M">
-                    <label class="custom-control-label" for="customRadio2">M</label>
-                  </div>
+                  <select class="custom-select" id="rol">
+                    <option value="Admin">Administrador</option>
+                    <option value="User">Usuario</option>
+                  </select>
                 </div>
                 <div class="form-group">
                   <select class="custom-select" id="status">
@@ -189,7 +184,7 @@
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary tx-13" data-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-primary tx-13" onclick="UpdateCustom();">Guardar</button>
+                <button type="button" class="btn btn-primary tx-13" onclick="UpdateUser();">Guardar</button>
               </div>
             </div>
           </div>
@@ -217,7 +212,7 @@
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary tx-13" data-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-danger tx-13" onclick="DeletePaid();">Desactivar</button>
+                <button type="button" class="btn btn-danger tx-13" onclick="DeleteUser();">Desactivar</button>
               </div>
             </div>
           </div>
@@ -252,7 +247,7 @@
                         data-original-title="Activo"></label>
                     </div>
                     <div class="col-4 col-sm-4">
-                      <h6>Último pago</h6>
+                      <h6>Último de Registro</h6>
                       <h5><p id="fechaPago"></p></h5>
                     </div>
                   </div>
