@@ -162,6 +162,9 @@
                   <input id="idC" type="hidden" class="form-control" disabled>
                 </div>
                 <div class="form-group">
+                  <input id="imagen" type="hidden" class="form-control" disabled>
+                </div>
+                <div class="form-group">
                   <input id="name" type="text" class="form-control" placeholder="Escribir Nombre">
                 </div>
                 <div class="form-group">
@@ -181,10 +184,86 @@
                     <label class="custom-control-label" for="customRadio2">M</label>
                   </div>
                 </div>
+                <div class="form-group">
+                  <input id="fechaP" type="date" class="form-control">
+                </div>
+                <div class="form-group">
+                  <input id="fechaV" type="date" class="form-control">
+                </div>
+                <div class="form-group">
+                  <input id="monto" type="number" class="form-control">
+                </div>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary tx-13" data-dismiss="modal">Cancelar</button>
                 <button type="button" class="btn btn-primary tx-13" onclick="UpdateCustom();">Guardar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel6"
+          aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content tx-14">
+              <div class="modal-header">
+                <h6 class="modal-title" id="exampleModalLabel6">EDITAR INFORMACIÓN DEL CLIENTE</h6>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div class="form-group">
+                  <div role="alert" id="msg1">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <input id="idC1" type="hidden" class="form-control" disabled>
+                </div>
+                <div class="form-group">
+                  <input id="imagen1" type="hidden" class="form-control" disabled>
+                </div>
+                <div class="form-group">
+                  <input id="name1" type="text" class="form-control" placeholder="Escribir Nombre" disabled>
+                </div>
+                <div class="form-group">
+                  <input id="email1" type="email" class="form-control" placeholder="example@example.com" disabled>
+                </div>
+                <div class="form-group">
+                  <input id="phone1" type="number" class="form-control" placeholder="Escribir Teléfono" disabled>
+                </div>
+                <div class="form-group">
+                  <label>Sexo</label>
+                  <div class="custom-control custom-radio">
+                    <input type="radio" id="customRadio11" name="customRadio1" class="custom-control-input" value="H" disabled>
+                    <label class="custom-control-label" for="customRadio1">H</label>
+                  </div>
+                  <div class="custom-control custom-radio">
+                    <input type="radio" id="customRadio21" name="customRadio1" class="custom-control-input" value="M" disabled>
+                    <label class="custom-control-label" for="customRadio2">M</label>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <input id="fechaP1" type="date" class="form-control">
+                </div>
+                <div class="form-group">
+                  <input id="fechaV1" type="date" class="form-control">
+                </div>
+                <div class="form-group">
+                  <input id="monto1" type="number" class="form-control">
+                </div>
+                <div class="form-group" id="pagoInfo">
+                  <select class="custom-select" id="pago">
+                    <option selected value="0">Tipo de pago</option>
+                    <option value="Efectivo">Efectivo</option>
+                    <option value="Tarjeta">Tarjeta</option>
+                    <option value="Transferencia">Transferencia</option>
+                  </select>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary tx-13" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary tx-13" onclick="AddVisit();">Guardar</button>
               </div>
             </div>
           </div>

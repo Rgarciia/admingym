@@ -102,12 +102,11 @@
               msg.innerHTML = "El cliente ya ha sido registrado!.";
             } else if (http.responseText == 0) {
               msg.className = "alert alert-success";
-              msg.innerHTML = "El cliente ah sido registrado exitosamente!.";
+              msg.innerHTML = "El cliente ha sido registrado exitosamente!.";
               window.setInterval('refresh()', 2000);
             } else {
               msg.className = "alert alert-danger";
               msg.innerHTML = "Ha ocurrido un error!.";
-             // console.log(http.responseText);
             }
           }
         }

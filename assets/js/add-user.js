@@ -89,7 +89,7 @@
         msg.innerHTML = "Repetir Contraseña!.";
       }else if (pass1 != pass2) {
         msg.className = "alert alert-warning";
-        msg.innerHTML = "Las contraseñas no coinciden, intentar de nuevo!.";
+        msg.innerHTML = "Las contraseñas no coinciden, intenta de nuevo!.";
       }else {
         msg.className = "spinner-border text-success";
         msg.innerHTML = "";
@@ -113,12 +113,11 @@
               msg.innerHTML = "El usuario ya ha sido registrado!.";
             } else if (http.responseText == 0) {
               msg.className = "alert alert-success";
-              msg.innerHTML = "El usuario ah sido registrado exitosamente!.";
+              msg.innerHTML = "El usuario ha sido registrado exitosamente!.";
               window.setInterval('refresh()', 2000);
             } else {
               msg.className = "alert alert-danger";
               msg.innerHTML = "Ha ocurrido un error!.";
-             // console.log(http.responseText);
             }
           }
         }

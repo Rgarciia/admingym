@@ -9,7 +9,7 @@ function DoLogin() {
       msg.innerHTML = "Llenar los datos solicitados!.";
     } else if (email == "") {
       msg.className = "alert alert-warning";
-      msg.innerHTML = "Llenar Emmail!.";
+      msg.innerHTML = "Llenar Email!.";
     } else if (pass == "") {
       msg.className = "alert alert-warning";
       msg.innerHTML = "Llenar Password!.";

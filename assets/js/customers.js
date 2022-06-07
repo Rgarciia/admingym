@@ -107,7 +107,6 @@ $(function () {
         http.onreadystatechange = function () {
             if (http.readyState == 4 && http.status == 200) {
                 if (http.responseText != 0) {
-                    // console.log(JSON.parse(http.responseText));
                     document.getElementById("name").value = JSON.parse(http.responseText)['NAME'];
                     document.getElementById("apaterno").value = JSON.parse(http.responseText)['LASTNAME1'];
                     document.getElementById("amaterno").value = JSON.parse(http.responseText)['LASTNAME2'];
@@ -207,7 +206,7 @@ function UpdateCustom() {
 
     if (name == '' && email == '' && apaterno == '' && amaterno == '' && phone == '') {
         msg.className = "alert alert-warning";
-        msg.innerHTML = "Llenar todos los campos para continuar!.";
+        msg.innerHTML = "Llenar los datos solicitados!.";
     } else if (apaterno == '') {
         msg.className = "alert alert-warning";
         msg.innerHTML = "Escribir Apellido Paterno!.";
@@ -228,11 +227,11 @@ function UpdateCustom() {
             if (http.readyState == 4 && http.status == 200) {
                 if (http.responseText == 1) {
                     msg.className = "alert alert-success";
-                    msg.innerHTML = "El cliente se ha actualizado exitosamente!.";
+                    msg.innerHTML = "El cliente ha sido actualizado exitosamente!.";
                     window.setInterval('refresh()', 2000);
                 } else {
                     msg.className = "alert alert-danger";
-                    msg.innerHTML = "Ha ocurrido un error al actualizar información!.";
+                    msg.innerHTML = "Ha ocurrido un error!.";
                 }
             }
         }
@@ -253,11 +252,11 @@ function DeletePaid() {
         if (http.readyState == 4 && http.status == 200) {
             if (http.responseText == 1) {
                 msg.className = "alert alert-success";
-                msg.innerHTML = "El Cliente se ha desactivado exitosamente!.";
+                msg.innerHTML = "El cliente ha sido desactivado exitosamente!.";
                 window.setInterval('refresh()', 2000);
             } else {
                 msg.className = "alert alert-danger";
-                msg.innerHTML = "Ha ocurrido un error al desactivar el pago!.";
+                msg.innerHTML = "Ha ocurrido un error!.";
             }
         }
     }

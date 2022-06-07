@@ -223,12 +223,12 @@ function UpdateUser() {
             if (http.readyState == 4 && http.status == 200) {
                 if (http.responseText == 1) {
                     msg.className = "alert alert-success";
-                    msg.innerHTML = "El usuario se ha actualizado exitosamente!.";
+                    msg.innerHTML = "El usuario ha sido actualizado exitosamente!.";
                     window.setInterval('refresh()', 2000);
                 } else {
                     console.log(http.response);
                     msg.className = "alert alert-danger";
-                    msg.innerHTML = "Ha ocurrido un error al actualizar información!.";
+                    msg.innerHTML = "Ha ocurrido un error!.";
                 }
             }
         }
@@ -249,11 +249,11 @@ function DeleteUser() {
         if (http.readyState == 4 && http.status == 200) {
             if (http.responseText == 1) {
                 msg.className = "alert alert-success";
-                msg.innerHTML = "El usuario se ha desactivado exitosamente!.";
+                msg.innerHTML = "El usuario ha sido desactivado exitosamente!.";
                 window.setInterval('refresh()', 2000);
             } else {
                 msg.className = "alert alert-danger";
-                msg.innerHTML = "Ha ocurrido un error al desactivar el pago!.";
+                msg.innerHTML = "Ha ocurrido un error!.";
             }
         }
     }

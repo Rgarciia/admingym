@@ -18,7 +18,7 @@
           document.getElementById("email").value = datos['EMAIL'];
         } else {
           msg.className = "alert alert-danger";
-          msg.innerHTML = "Error al buscar información!.";
+          msg.innerHTML = "Ha ocurrido un error!.";
         }
       }
     }
@@ -64,7 +64,7 @@
               window.setInterval('refresh()', 2000);
             } else {
               msg.className = "alert alert-danger";
-              msg.innerHTML = "Error al actualizar información!.";
+              msg.innerHTML = "Ha ocurrido un error!.";
             }
           }
         }

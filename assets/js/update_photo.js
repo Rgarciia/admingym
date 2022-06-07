@@ -79,11 +79,11 @@ function UpdatePhoto() {
         if (https.readyState == 4 && https.status == 200) {
             if (https.responseText == 1) {
                 msg.className = "alert alert-success";
-                msg.innerHTML = "La foto fue actualizada!.";
+                msg.innerHTML = "La foto ha sido actualizada!.";
                 window.setInterval('refresh()', 2000);
             } else {
                 msg.className = "alert alert-danger";
-                msg.innerHTML = "Error al actualizar foto!.";
+                msg.innerHTML = "Ha ocurrido un error!.";
             }
         }
     }

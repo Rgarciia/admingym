@@ -113,22 +113,22 @@ $(function () {
 
     if (fecha_ini == '' && fecha_vencimiento == '' && total == '' && pago == 0) {
       msg.className = "alert alert-danger";
-      msg.innerHTML = "Debes llenar los campos";
+      msg.innerHTML = "Llenar los datos solicitados!.";
     } else if (fecha_ini == '') {
       msg.className = "alert alert-warning";
-      msg.innerHTML = "Llenar fecha de pago";
+      msg.innerHTML = "Llenar fecha de pago!.";
     } else if (fecha_vencimiento == '') {
       msg.className = "alert alert-warning";
-      msg.innerHTML = "Llenar fecha de vencimiento";
+      msg.innerHTML = "Llenar fecha de vencimiento!.";
     } else if (pago == 0) {
       msg.className = "alert alert-warning";
-      msg.innerHTML = "Seleccionar el tipo de pago";
+      msg.innerHTML = "Seleccionar el tipo de pago!.";
     } else if (total == '') {
       msg.className = "alert alert-warning";
-      msg.innerHTML = "Llenar el monto";
+      msg.innerHTML = "Llenar el monto!.";
     } else if (fecha_vencimiento < fecha_ini) {
       msg.className = "alert alert-warning";
-      msg.innerHTML = "Fecha de vencimiento no debe ser menor que fecha de pago!";
+      msg.innerHTML = "Fecha de vencimiento no debe ser menor que fecha de pago!.";
     } else {
       let http = new XMLHttpRequest();
       let msg = document.getElementById("msg");
@@ -145,7 +145,7 @@ $(function () {
             window.setInterval('refresh()', 2000);
           } else {
             msg.className = "alert alert-danger";
-            msg.innerHTML = "El pago no ha sido registrado!.";
+            msg.innerHTML = "Ha ocurrido un error!.";
           }
         }
       }

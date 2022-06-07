@@ -13,7 +13,7 @@ https.onreadystatechange = function () {
 
         } else {
             msg.className = "alert alert-danger";
-            msg.innerHTML = "Error al foto información!.";
+            msg.innerHTML = "Ha ocurrido un error!.";
           }
     }
 }
@@ -48,11 +48,11 @@ function ChangePass() {
             if (https.readyState == 4 && https.status == 200) {
                 if (https.responseText == 1) {
                     msg.className = "alert alert-success";
-                    msg.innerHTML = "La constraseña fue actualizada!.";
+                    msg.innerHTML = "La constraseña ha sido actualizada exitosamente!.";
                     window.setInterval('refresh()', 2000);
                 } else {
                     msg.className = "alert alert-danger";
-                    msg.innerHTML = "Error al actualizar contraseña!.";
+                    msg.innerHTML = "Ha ocurrido un error!.";
                 }
             }
         }
