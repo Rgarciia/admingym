@@ -142,7 +142,7 @@ $(function () {
                     document.getElementById('img').src = JSON.parse(http.responseText)['FOTO'];
                     var element = document.getElementById("statusCustomer");
                     element.innerHTML = JSON.parse(http.responseText)['ESTADO'];
-                    if(JSON.parse(http.responseText)['FECHA_VISIT'] == 'ACTIVO'){
+                    if(JSON.parse(http.responseText)['ESTADO'] == 'ACTIVO'){
                         element.className += "btn btn-pill btn-success";
                     }else{
                         element.className += "btn btn-pill btn-danger";
