@@ -154,5 +154,6 @@ $(function () {
   }
 
   function refresh() {
-    window.location.reload();
+    //window.location.reload();
+    location.replace("paids.html");
   }

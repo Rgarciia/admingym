@@ -266,4 +266,5 @@ function DeletePaid() {
 
 function refresh() {
     window.location.reload();
+    //location.replace("customers.html");
 }

@@ -127,5 +127,6 @@
 
     }
     function refresh() {
-        window .location.reload();
+       // window .location.reload();
+       location.replace("users.html");
     }
