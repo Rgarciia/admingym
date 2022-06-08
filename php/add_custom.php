@@ -8,7 +8,7 @@ $phone=$_POST['phone'];
 $email=$_POST['email'];
 $sexo=$_POST['sexo'];
 $photo=$_POST['photo'];
-$fecha=date("Y/m/d H:i:s");
+$fecha=date("Y/m/d");
 
 $fotoEncr = str_replace(" ","+",$photo);
 

@@ -9,7 +9,7 @@ $email=$_POST['email'];
 $role=$_POST['role'];
 $pass1=md5($_POST['pass1']);
 $photo=$_POST['photo'];
-$fecha=date("Y/m/d H:i:s");
+$fecha=date("Y/m/d");
 
 $fotoEncr = str_replace(" ","+",$photo);
 
