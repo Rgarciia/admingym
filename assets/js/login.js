@@ -18,8 +18,7 @@ function DoLogin() {
       msg.innerHTML = "Seleccionar Tipo de Usuario!.";
     } else {
       msg.className = "spinner-border text-success";
-      msg.innerHTML = "";
-
+     
       let http = new XMLHttpRequest();
       let url = 'php/get_usr.php';
       let params = 'email=' + email + '&password=' + pass + '&tipo=' + role;
@@ -29,6 +28,7 @@ function DoLogin() {
       http.onreadystatechange = function () {
         if (http.readyState == 4 && http.status == 200) {
           if (http.responseText != 0) {
+            msg.innerHTML = "";
             datos = JSON.parse(http.responseText);
             //sessionStorage.setItem("username", datos['EMAIL']);
             sessionStorage.setItem("ID_USER", datos['ID_USER']);
