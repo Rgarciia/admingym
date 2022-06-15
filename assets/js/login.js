@@ -17,6 +17,7 @@ function DoLogin() {
       msg.className = "alert alert-warning";
       msg.innerHTML = "Seleccionar Tipo de Usuario!.";
     } else {
+      msg.innerHTML = "";
       msg.className = "spinner-border text-success";
      
       let http = new XMLHttpRequest();
@@ -28,16 +29,16 @@ function DoLogin() {
       http.onreadystatechange = function () {
         if (http.readyState == 4 && http.status == 200) {
           if (http.responseText != 0) {
-            msg.innerHTML = "";
             datos = JSON.parse(http.responseText);
             //sessionStorage.setItem("username", datos['EMAIL']);
             sessionStorage.setItem("ID_USER", datos['ID_USER']);
             //sessionStorage.setItem("foto", datos['PHOTO']);
             //sessionStorage.setItem("role", datos['ROLE']);
             location.replace("app/index.html");
-          }
+          }else{
           msg.className = "alert alert-danger";
           msg.innerHTML = "Verifica que los datos sean correctos!.";
+          }
         }
       }
       http.send(params);
