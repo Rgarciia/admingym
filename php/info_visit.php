@@ -8,7 +8,7 @@ if (!$conn) {
   die("Connection failed: " . mysqli_connect_error());
 }else{
   $sql = "SELECT ID_VISIT, NAMEC, SEXO, PHONE, EMAIL, FOTO, FECHA_VISIT, 
-  IF(FECHA_FIN >= CURDATE(), 'ACTIVO', 'VENCIDO') AS ESTADO FROM VISITS WHERE ID_VISIT=$id";
+  IF(FECHA_FIN >= CURDATE(), 'ACTIVO', 'VENCIDO') AS ESTADO FROM visits WHERE ID_VISIT=$id";
     $result = mysqli_query($conn, $sql);
 
     if (mysqli_num_rows($result) > 0) {
