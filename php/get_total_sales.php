@@ -8,7 +8,10 @@ if (!$conn) {
   $sql = "SELECT SUM(TP) AS TV FROM
   (SELECT SUM(MONTO) AS TP FROM paids
   UNION
-  SELECT SUM(MONTO) AS TS FROM sales) AS total;";
+  SELECT SUM(MONTO) AS TS FROM sales
+  UNION
+  SELECT SUM(TOTAL) AS TV FROM visits
+  ) AS total";
     $result = mysqli_query($conn, $sql);
 
     if (mysqli_num_rows($result) > 0) {
