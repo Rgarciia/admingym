@@ -239,85 +239,10 @@
                   <a href="" class="link-03 lh-0"><i class="icon ion-md-refresh"></i></a>
                 </div>
               </div>
-              <ul class="list-group list-group-flush tx-13">
-                <li class="list-group-item d-flex pd-sm-x-20">
-                  <div class="avatar"><span class="avatar-initial rounded-circle bg-gray-600">s</span></div>
-                  <div class="pd-l-10">
-                    <p class="tx-medium mg-b-0">Socrates Itumay</p>
-                    <small class="tx-12 tx-color-03 mg-b-0">Customer ID#00222</small>
-                  </div>
-                  <div class="mg-l-auto d-flex align-self-center">
-                    <nav class="nav nav-icon-only">
-                      <a href="" class="nav-link d-none d-sm-block"><i data-feather="mail"></i></a>
-                      <a href="" class="nav-link d-none d-sm-block"><i data-feather="slash"></i></a>
-                      <a href="" class="nav-link d-none d-sm-block"><i data-feather="user"></i></a>
-                      <a href="" class="nav-link d-sm-none"><i data-feather="more-vertical"></i></a>
-                    </nav>
-                  </div>
-                </li>
-                <li class="list-group-item d-flex pd-x-20">
-                  <div class="avatar"><img src="https://via.placeholder.com/500" class="rounded-circle" alt=""></div>
-                  <div class="pd-l-10">
-                    <p class="tx-medium mg-b-0">Reynante Labares</p>
-                    <small class="tx-12 tx-color-03 mg-b-0">Customer ID#00221</small>
-                  </div>
-                  <div class="mg-l-auto d-flex align-self-center">
-                    <nav class="nav nav-icon-only">
-                      <a href="" class="nav-link d-none d-sm-block"><i data-feather="mail"></i></a>
-                      <a href="" class="nav-link d-none d-sm-block"><i data-feather="slash"></i></a>
-                      <a href="" class="nav-link d-none d-sm-block"><i data-feather="user"></i></a>
-                      <a href="" class="nav-link d-sm-none"><i data-feather="more-vertical"></i></a>
-                    </nav>
-                  </div>
-                </li>
-                <li class="list-group-item d-flex pd-x-20">
-                  <div class="avatar"><img src="https://via.placeholder.com/500" class="rounded-circle" alt=""></div>
-                  <div class="pd-l-10">
-                    <p class="tx-medium mg-b-0">Marianne Audrey</p>
-                    <small class="tx-12 tx-color-03 mg-b-0">Customer ID#00220</small>
-                  </div>
-                  <div class="mg-l-auto d-flex align-self-center">
-                    <nav class="nav nav-icon-only">
-                      <a href="" class="nav-link d-none d-sm-block"><i data-feather="mail"></i></a>
-                      <a href="" class="nav-link d-none d-sm-block"><i data-feather="slash"></i></a>
-                      <a href="" class="nav-link d-none d-sm-block"><i data-feather="user"></i></a>
-                      <a href="" class="nav-link d-sm-none"><i data-feather="more-vertical"></i></a>
-                    </nav>
-                  </div>
-                </li>
-                <li class="list-group-item d-flex pd-x-20">
-                  <div class="avatar"><span class="avatar-initial rounded-circle bg-indigo op-5">o</span></div>
-                  <div class="pd-l-10">
-                    <p class="tx-medium mg-b-0">Owen Bongcaras</p>
-                    <small class="tx-12 tx-color-03 mg-b-0">Customer ID#00219</small>
-                  </div>
-                  <div class="mg-l-auto d-flex align-self-center">
-                    <nav class="nav nav-icon-only">
-                      <a href="" class="nav-link d-none d-sm-block"><i data-feather="mail"></i></a>
-                      <a href="" class="nav-link d-none d-sm-block"><i data-feather="slash"></i></a>
-                      <a href="" class="nav-link d-none d-sm-block"><i data-feather="user"></i></a>
-                      <a href="" class="nav-link d-sm-none"><i data-feather="more-vertical"></i></a>
-                    </nav>
-                  </div>
-                </li>
-                <li class="list-group-item d-flex pd-x-20">
-                  <div class="avatar"><span class="avatar-initial rounded-circle bg-primary op-5">k</span></div>
-                  <div class="pd-l-10">
-                    <p class="tx-medium mg-b-0">Kirby Avendula</p>
-                    <small class="tx-12 tx-color-03 mg-b-0">Customer ID#00218</small>
-                  </div>
-                  <div class="mg-l-auto d-flex align-self-center">
-                    <nav class="nav nav-icon-only">
-                      <a href="" class="nav-link d-none d-sm-block"><i data-feather="mail"></i></a>
-                      <a href="" class="nav-link d-none d-sm-block"><i data-feather="slash"></i></a>
-                      <a href="" class="nav-link d-none d-sm-block"><i data-feather="user"></i></a>
-                      <a href="" class="nav-link d-sm-none"><i data-feather="more-vertical"></i></a>
-                    </nav>
-                  </div>
-                </li>
+              <ul class="list-group list-group-flush tx-13" id="customersList">
               </ul>
               <div class="card-footer text-center tx-13">
-                <a href="" class="link-03">View More Customers <i class="icon ion-md-arrow-down mg-l-5"></i></a>
+                <a href="" class="link-03">Ver Clientes <i class="icon ion-md-arrow-down mg-l-5"></i></a>
               </div><!-- card-footer -->
             </div><!-- card -->
           </div>
@@ -432,6 +357,20 @@
         }
       }
       httpSalesP.send();
+
+      let httpCustomers = new XMLHttpRequest();
+      let customers = document.getElementById("customersList");
+      let urlcustomers = '../php/customers_month.php';
+      httpCustomers.open('GET', urlcustomers, true);
+      httpCustomers.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+      httpCustomers.onreadystatechange = function () {
+        if (httpCustomers.readyState == 4 && httpCustomers.status == 200) {
+          if (httpCustomers.responseText != '') {
+            customers.innerHTML = httpCustomers.responseText;
+          }
+        }
+      }
+      httpCustomers.send();
       
     })
   </script>

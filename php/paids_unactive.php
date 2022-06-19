@@ -21,14 +21,14 @@ if (!$conn) {
     if (mysqli_num_rows($result) > 0) {
     while($row = mysqli_fetch_assoc($result)) {
        echo"<li class='list-group-item d-flex pd-sm-x-20'>
-       <div class='avatar d-none d-sm-block'><span class='avatar-initial rounded-circle bg-teal'><i
+       <div class='avatar d-none d-sm-block'><span class='avatar-initial rounded-circle bg-gray-400'><i
              class='icon ion-md-close'></i></span></div>
        <div class='pd-sm-l-10'>
          <p class='tx-medium mg-b-0'>Venta de $row[NAME]</p>
          <small class='tx-12 tx-color-03 mg-b-0'>$row[FECHA_FIN]</small>
        </div>
        <div class='mg-l-auto text-right'>
-         <p class='tx-medium mg-b-0'>+ $$row[MONTO]</p>
+         <p class='tx-medium mg-b-0'>+ $row[MONTO]</p>
          <small class='tx-12 tx-danger mg-b-0'>$row[ESTADO]</small>
        </div>
      </li>";
