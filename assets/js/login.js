@@ -34,7 +34,7 @@ function DoLogin() {
             sessionStorage.setItem("ID_USER", datos['ID_USER']);
             //sessionStorage.setItem("foto", datos['PHOTO']);
             //sessionStorage.setItem("role", datos['ROLE']);
-            location.replace("app/index.html");
+            location.replace("app/");
           }else{
           msg.className = "alert alert-danger";
           msg.innerHTML = "Verifica que los datos sean correctos!.";
