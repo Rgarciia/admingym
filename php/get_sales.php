@@ -5,7 +5,7 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
 if (!$conn) {
   die("Connection failed: " . mysqli_connect_error());
 }else{
-    $sql = "SELECT * FROM sales";
+    $sql = "SELECT ID_SALE, DESCR, CONCAT('$', MONTO) AS MONTO, FECHA_REGISTRO FROM sales;";
     $result = mysqli_query($conn, $sql);
 
     if (mysqli_num_rows($result) > 0) {
