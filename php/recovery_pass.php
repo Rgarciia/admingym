@@ -5,7 +5,7 @@ $email=$_POST['email'];
 $pass=md5($_POST['password']);
 
 $to = $email;
-$from = 'al221310967@gmail.com'
+$from = 'al221310967@gmail.com';
 $subject = 'Recuperación de Contraseña';
 
 $headers = "From: " . strip_tags($from) . "\r\n";
