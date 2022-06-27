@@ -34,7 +34,7 @@ if (!$conn) {
             $message .= "</body></html>";
 
             if (mail($to, $subject, $message, $headers)) {
-                echo '0';
+                echo '1';
               } 
         } else {
         echo "2";
