@@ -34,12 +34,8 @@ if (!$conn) {
             $message .= "</body></html>";
 
             if (mail($to, $subject, $message, $headers)) {
-                echo 'Your message has been sent.';
-              } else {
-                echo 'There was a problem sending the email.';
-              }
-
-        echo "1";
+                echo '0';
+              } 
         } else {
         echo "2";
         }
